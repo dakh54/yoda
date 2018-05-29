@@ -5,7 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    
+    apiKey: "AIzaSyCjrUHdKpk-cM4uUgteZzk3x4XEHLNc0L0",
+    authDomain: "yoda-test-01.firebaseapp.com",
+    databaseURL: "https://yoda-test-01.firebaseio.com",
+    projectId: "yoda-test-01",
+    storageBucket: "yoda-test-01.appspot.com",
+    messagingSenderId: "40325241991"
   }
 };
 
