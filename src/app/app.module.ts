@@ -1,56 +1,51 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { AppMaterialModule } from './shared/app-material.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
+import { HomeLayoutComponent } from './layouts/home-layout.component';
+import { LoginLayoutComponent } from './layouts/login-layout.component';
+import { LoginComponent } from './login/login.component';
+
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
-
-import { AppComponent } from './app.component';
-import { MaterialModule } from './shared/material.module';
-import { RouterModule } from '@angular/router';
-import { routes } from './app.module.routing';
-
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AuthService } from './auth/auth.service';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { CoreModule } from './auth/core.module';
-import { LayoutModule } from '@angular/cdk/layout';
-
-
-
-import { UserModule } from './users/user.module';
-import { LoginComponent } from './auth/login.component';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-
-
-
+import { FirebasedModule } from './shared/firebase.module';
+import { PageNotFoundComponent } from './errors/page-not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    HomeComponent,
+    LoginComponent,
+    HomeLayoutComponent,
+    LoginLayoutComponent,
+    HeaderComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    AppMaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    CoreModule,
-    RouterModule.forRoot(routes),
-    LayoutModule,
-    UserModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
+    FirebasedModule
+    
   ],
   providers: [
+    AuthService,
+    AuthGuard,
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
   ],
   bootstrap: [AppComponent]
-}) 
+})
 export class AppModule { }
