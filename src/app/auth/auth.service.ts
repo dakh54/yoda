@@ -5,7 +5,7 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import { Router } from "@angular/router";
 import * as firebase from 'firebase/app';
 
-import { Iuser } from './iuser';
+import { Iuser } from '../users/iuser';
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators'
@@ -15,74 +15,56 @@ import { switchMap } from 'rxjs/operators'
 })
 export class AuthService {
 
-  //user: Observable<Iuser>;
-
-  // constructor(private afAuth: AngularFireAuth,
-  //             private afs: AngularFirestore,
-  //             private router: Router) {
-
-  //     //           console.log('afAuth', this.afAuth.authState);
-  //     //           // console.log('this.afs.doc<Iuser>', this.afs.doc<Iuser>(`users/${user.id}`));
-  //     //           // this.afAuth.authState.pipe(
-  //     // console.log('users:', this.user);
-  //               // )
-  //     // Define the user observable
-  //     this.user = this.afAuth.authState.pipe(
-  //         switchMap(user => {
-  //           if (user) {
-  //             // logged in, get custom user from Firestore
-  //             console.log('customData', this.afs.doc<Iuser>(`users/${user.email}`).valueChanges());
-  //             return this.afs.doc<Iuser>(`users/${user.email}`).valueChanges()
-  //           } else {
-  //             // logged out, null
-  //             return of(null)
-  //           }
-  //         })
-  //       );
-
-  //       console.log()
-  // }
-
+ 
   authState: any = null;
 
   constructor(private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
     private afs: AngularFirestore,
     private router: Router) {
-
+    
+    // get authState when there is a change in login
     this.afAuth.authState.subscribe((auth) => {
-      this.authState = auth  });
-      console.log('authState', this.authState);
-    }
+      this.authState = auth
+    });
+  }
 
-    emailLogin(email:string, password:string) {
-      return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-        .then((user) => {
-          //this.authState = user
-          //console.log('this.authState', this.authState)
-          //this.updateUserData()
-          console.log('login-user', user);
-        })
-        .catch(error => console.log(error));
-   }
- 
+  emailLogin(email: string, password: string) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  // Returns true if user is logged in
+  get authenticated(): boolean {
+    return this.authState !== null;
+  }
+
+  // Returns current user
+  get currentUser(): any {
+    return this.authenticated ? this.authState.auth : null;
+  }
+
+  // Returns current user UID
+  get currentUserId(): string {
+    return this.authenticated ? this.authState.uid : '';
+  }
+
   //  // Sends email allowing user to reset password
   //  resetPassword(email: string) {
   //    var auth = firebase.auth();
- 
+
   //    return auth.sendPasswordResetEmail(email)
   //      .then(() => console.log("email sent"))
   //      .catch((error) => console.log(error))
   //  }
- 
- 
-  //  //// Sign Out ////
-  //  signOut(): void {
-  //    this.afAuth.auth.signOut();
-  //    this.router.navigate(['/'])
-  //  }
- 
- 
+
+
+   //// Sign Out ////
+   signOut(): void {
+     this.afAuth.auth.signOut();
+     this.router.navigate(['/'])
+   }
+
+
   //  //// Helpers ////
   //  private updateUserData(): void {
   //  // Writes user name and email to realtime db
@@ -92,9 +74,9 @@ export class AuthService {
   //                  email: this.authState.email,
   //                  name: this.authState.displayName
   //                }
- 
+
   //    this.db.object(path).update(data)
   //    .catch(error => console.log(error));
- 
+
   //  }
 }

@@ -1,7 +1,7 @@
 <div class="wraper">
   <form class="center-page" autocomplete="off" novalidate [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" >
     <img src="assets/flat-avatar.png" />
-    <h1 class="title">Loan Origination</h1>
+    <h1 class="title">LORI</h1>
     <mat-form-field>
       <input type="email" matInput placeholder="Email" [formControl]="email" required>
       <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
@@ -16,6 +16,8 @@
       <input type="password" [formControl]="password" matInput placeholder="Password" required>
       <mat-error *ngIf="password.hasError('required')">Please enter password</mat-error>
     </mat-form-field>
+    <mat-error *ngIf="error">Invalid login.</mat-error>
     <button mat-button type="submit" [disabled]="loginForm.invalid"> Log in </button>  
+    <button mat-button type="button" (click)="goToUser()"> go to users </button>  
   </form>
 </div>
