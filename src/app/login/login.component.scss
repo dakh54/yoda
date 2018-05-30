@@ -1,0 +1,50 @@
+.wraper {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+form {
+  margin: auto;
+  padding: 50px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    
+}
+
+img {
+  width: 100px;
+  align-self: center;
+}
+
+
+.title {
+  text-align: center;
+}
+
+button {
+  width: 25%;
+  align-self: center;
+  background-color: #248f24;
+  color: white;
+}
+
+@media  (max-width: 420px) {
+  form {
+      width: 100%;
+  }
+
+}
+
+// md-card {
+//   max-width: 400px;
+//   margin: 2em auto;
+//   text-align: center;
+// }
+// .signin-content {
+//   padding: 60px 1rem;
+// }
+// .full-width-input {
+//   width: 100%;
+// }
