@@ -1,8 +1,14 @@
-import { Iperson } from "../shared/iperson";
-
-export interface Iuser extends Iperson {
+export interface Iuser {
     uid: string
-    employeeId: string
-    position?: string
+    firstName?: string
+    lastName?: string
+    employeeId?: string
+    nationalId?: string
+    displayname?: string
+    pictureRrl?: string
+    phone?: string []
+    email?: string
+    position: string
+    address: string
     roles: string []
 }
