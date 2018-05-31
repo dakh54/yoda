@@ -29,14 +29,15 @@ export class LoginComponent implements OnInit {
       email: this.email,
       password: this.password
     });
-
-    console.log('loginComponent', this.auth.authenticated);
   }
 
   login(loginFormValue) {
     this.auth.emailLogin(loginFormValue.email, loginFormValue.password)
     .then((user) => {
       this.auth.authState = user;
+      
+      console.log('userId', this.auth.authState);
+      
       this.error = null;
       this.router.navigate(['/users']);
     })

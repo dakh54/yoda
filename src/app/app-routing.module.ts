@@ -8,6 +8,7 @@ import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 
 
+
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +20,7 @@ const routes: Routes = [
         component: HomeComponent
       },
       { path: 'users', loadChildren: './users/user.module#UserModule' },
-      { path: 'branches', loadChildren: './branches/branch.module#BranchModule '}
+      { path: 'branches', loadChildren: './branches/branch.module#BranchModule'}
 
     ]
   },

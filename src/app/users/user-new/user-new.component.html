@@ -1,3 +1,92 @@
-<p>
-  user-new works!
-</p>
+<div class="container">
+  <form class="user-new-container" autocomplete="off" [formGroup]="newEmployeeForm" novalidate (ngSubmit)="save(newEmployeeForm.value)">
+    <mat-form-field appearance="standard">
+      <mat-label>First name</mat-label>
+      <input matInput placeholder="First Name" [formControl]="firstName" required>
+      <mat-error *ngIf="firstName.hasError('required')">
+        First name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Last name</mat-label>
+      <input matInput placeholder="Last Name" [formControl]="lastName" required>
+      <mat-error *ngIf="lastName.hasError('required')">
+        Last name is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>National Id</mat-label>
+      <input matInput placeholder="National id" [formControl]="nationalId">
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Employee Id</mat-label>
+      <input matInput placeholder="Employee id" [formControl]="employeeId" required>
+      <mat-error *ngIf="employeeId.hasError('required')">
+        Employee id is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Employee position</mat-label>
+      <mat-select placeholder="Poistion" [formControl]="employeePosition">
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+      <mat-error *ngIf="employeePosition.hasError('required')">
+        Employee position is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="Email" [formControl]="email" required>
+      <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="email.hasError('required')">
+        Email is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Primary Phone</mat-label>
+      <input matInput placeholder="Primary phone" [formControl]="primaryPhone">
+    </mat-form-field>
+
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>Secondary Phone</mat-label>
+      <input matInput placeholder="Secondary phone" [formControl]="secondaryPhone">
+    </mat-form-field>
+
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>Home Office</mat-label>
+      <input matInput placeholder="Home office" [formControl]="homeOffice" required>
+      <mat-error *ngIf="homeOffice.hasError('required')">
+        Home office is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Roles</mat-label>
+      <mat-select placeholder="Role" [formControl]="roles" multiple required>
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+      <mat-error *ngIf="roles.hasError('required')">
+        Role is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>

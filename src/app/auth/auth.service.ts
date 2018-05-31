@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Router } from "@angular/router";
 import * as firebase from 'firebase/app';
 
-import { Iuser } from '../users/iuser';
-
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators'
+import { Iemployee } from '../models/iemployee';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +16,16 @@ export class AuthService {
 
  
   authState: any = null;
+  
 
   constructor(private afAuth: AngularFireAuth,
-    private db: AngularFireDatabase,
+//    private db: AngularFireDatabase,
     private afs: AngularFirestore,
     private router: Router) {
     
     // get authState when there is a change in login
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth
-      console.log('authSErvice', auth);
     });
   }
 
@@ -39,10 +38,33 @@ export class AuthService {
     return this.authState !== null;
   }
 
-  // Returns current user
-  get currentUser(): any {
-    return this.authenticated ? this.authState.auth : null;
-  }
+  
+
+  // // Returns current user
+  // get currentUser(): any {
+    
+  //   // if(this.authenticated) {
+
+  //   //   let employeeCollection: AngularFirestoreCollection<Iemployee>;
+  //   //   employeeCollection = this.afs.collection('employees', ref =>
+  //   //   {
+  //   //     return ref.where('email', '==',  this.authState.user.email).where('status', '==', 'active').limit(1);
+  //   //   });
+  
+  //   //     employeeCollection.valueChanges().subscribe(
+  //   //       data => { 
+  //   //         return data[0]; 
+  //   //       },
+  //   //       error => { return 'error data user' }
+  //   //     )
+  //   //   } else {
+  //   //     return null;
+  //   //   }
+    
+
+    
+  //   return this.authenticated ? this.authState.auth : null;
+  // }
 
   // Returns current user UID
   get currentUserId(): string {

@@ -1,10 +1,10 @@
 export interface Iaddress {
-    locationNumber?: string
+    number?: string
+    street?: string
     village?: string
     commune?: string
     khan?: string
     city?: string
-    province?: string
     country?: string
 }
 

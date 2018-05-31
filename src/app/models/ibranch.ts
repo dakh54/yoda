@@ -1,4 +1,4 @@
-import { Iaddress } from "../shared/iaddress";
+import { Iaddress } from "./iaddress";
 
 export interface Ibranch {
     name: string
