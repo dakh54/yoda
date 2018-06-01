@@ -5,15 +5,15 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserNewComponent } from './user-new/user-new.component';
 import { AppMaterialModule } from '../shared/app-material.module';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     UserRoutingModule,
     AppMaterialModule,
-    ReactiveFormsModule,
-    FormsModule
+    ReactiveFormsModule
+    
   ],
   declarations: [UserListComponent, UserEditComponent, UserNewComponent]
 })

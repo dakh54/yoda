@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
@@ -21,6 +21,7 @@ import { PageNotFoundComponent } from './errors/page-not-found.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,13 +36,11 @@ import { PageNotFoundComponent } from './errors/page-not-found.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AppMaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FirebasedModule
-    
   ],
   providers: [
     AuthService,

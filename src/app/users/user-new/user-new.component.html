@@ -1,92 +1,125 @@
-<div class="container">
-  <form class="user-new-container" autocomplete="off" [formGroup]="newEmployeeForm" novalidate (ngSubmit)="save(newEmployeeForm.value)">
-    <mat-form-field appearance="standard">
-      <mat-label>First name</mat-label>
-      <input matInput placeholder="First Name" [formControl]="firstName" required>
-      <mat-error *ngIf="firstName.hasError('required')">
-        First name is
-        <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+<form class="form-wrapper" autocomplete="off" [formGroup]="newEmployeeForm" novalidate (ngSubmit)="save()">
+  <h3 class="title">Register New Employee</h3>
+  <div class="user-new-container">
+    <div class="colum-1">
+      <mat-form-field appearance="standard">
+        <mat-label>First name</mat-label>
+        <input matInput placeholder="First Name" [formControlName]="firstName" required>
+        <mat-error *ngIf="newEmployeeForm.get('firstName').errors.required">
+          First name is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="standard">
-      <mat-label>Last name</mat-label>
-      <input matInput placeholder="Last Name" [formControl]="lastName" required>
-      <mat-error *ngIf="lastName.hasError('required')">
-        Last name is
-        <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Last name</mat-label>
+        <input matInput placeholder="Last Name" [formControlName]="lastName" required>
+        <mat-error *ngIf="newEmployeeForm.get('lastName').errors.required">
+          Last name is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="standard">
-      <mat-label>National Id</mat-label>
-      <input matInput placeholder="National id" [formControl]="nationalId">
-    </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Position</mat-label>
+        <mat-select placeholder="Poistion" [formControlName]="employeePosition">
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+        <mat-error *ngIf="newEmployeeForm.get('employeePosition').errors.required">
+          Employee position is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="standard">
-      <mat-label>Employee Id</mat-label>
-      <input matInput placeholder="Employee id" [formControl]="employeeId" required>
-      <mat-error *ngIf="employeeId.hasError('required')">
-        Employee id is
-        <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Employee Id</mat-label>
+        <input matInput placeholder="Employee id" [formControlName]="employeeId" required>
+        <mat-error *ngIf="newEmployeeForm.get('employeeId').errors.required">
+          Employee id is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="standard">
-      <mat-label>Employee position</mat-label>
-      <mat-select placeholder="Poistion" [formControl]="employeePosition">
-        <mat-option value="option">Option</mat-option>
-      </mat-select>
-      <mat-error *ngIf="employeePosition.hasError('required')">
-        Employee position is
-        <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>National Id</mat-label>
+        <input matInput placeholder="National id" [formControlName]="nationalId">
+      </mat-form-field>
 
-    <mat-form-field appearance="standard">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput placeholder="Email" [formControl]="email" required>
-      <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="email.hasError('required')">
-        Email is
-        <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Home Office</mat-label>
+        <input matInput placeholder="Home office" [formControlName]="homeOffice" required>
+        <mat-error *ngIf="newEmployeeForm.get('homeOffice').errors.required">
+          Home office is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="colum-2">
+      <mat-form-field appearance="standard">
+        <mat-label>Primary Phone</mat-label>
+        <input matInput placeholder="Primary phone" [formControlName]="primaryPhone">
+      </mat-form-field>
 
-    <mat-form-field appearance="standard">
-      <mat-label>Primary Phone</mat-label>
-      <input matInput placeholder="Primary phone" [formControl]="primaryPhone">
-    </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Secondary Phone</mat-label>
+        <input matInput placeholder="Secondary phone" [formControlName]="secondaryPhone">
+      </mat-form-field>
 
+      <mat-form-field appearance="standard">
+        <mat-label>Roles</mat-label>
+        <mat-select placeholder="Role" [formControlName]="roles" multiple required>
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+        <mat-error *ngIf="newEmployeeForm.get('roles').errors.required">
+          Role is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
+      <mat-form-field appearance="standard">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput placeholder="Email" [formControlName]="email" required>
+        <mat-error *ngIf="newEmployeeForm.get('email').errors.email && !newEmployeeForm.get('email').errors.required">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="newEmployeeForm.get('email').errors.required">
+          Email is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="standard">
-      <mat-label>Secondary Phone</mat-label>
-      <input matInput placeholder="Secondary phone" [formControl]="secondaryPhone">
-    </mat-form-field>
+      <div [formGroup]="passwordGroup">
+        <mat-form-field appearance="standard">
+          <input [type]="hidePassword ? 'password' : 'text'" [formControlName]="password" matInput placeholder="Password" required>
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="newEmployeeForm.get('password').errors.passwordGroup"> Password is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="standard">
+          <input [type]="hidePasswordConfirmed ? 'password' : 'text'" [formControlName]="confirmedPassword" matInput placeholder="Confirm Password" required>
+          <mat-icon matSuffix (click)="hidePasswordConfirmed = !hidePasswordConfirmed">{{hidePasswordConfirmed ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="newEmployeeForm.get('confirmedPassword').errors.passwordGroup"> Confirmed password is
+            <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="newEmployeeForm.get('passwordGroup').errors.match"> Confirmed password does not
+            <strong>match</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <div class="footer">
+        <button mat-raised-button>
+          <mat-icon>cancel</mat-icon> Cancel
+        </button>
+        <button mat-raised-button color="primary">
+          <mat-icon>save</mat-icon> Save
+        </button>
+      </div>
+  
+  </div>
 
-
-
-    <mat-form-field appearance="standard">
-      <mat-label>Home Office</mat-label>
-      <input matInput placeholder="Home office" [formControl]="homeOffice" required>
-      <mat-error *ngIf="homeOffice.hasError('required')">
-        Home office is
-        <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="standard">
-      <mat-label>Roles</mat-label>
-      <mat-select placeholder="Role" [formControl]="roles" multiple required>
-        <mat-option value="option">Option</mat-option>
-      </mat-select>
-      <mat-error *ngIf="roles.hasError('required')">
-        Role is
-        <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </form>
-</div>
+  
+</form>

@@ -1,16 +1,42 @@
 .wraper {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
 
 form {
-  margin: auto;
-  padding: 50px;
-  width: 400px;
+  // height: 100%;
+  // margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;    
+  justify-content: center;
+}
+
+
+@media (max-width: 420px) {
+  .wraper {
+    height: 100%;
+  }
+
+  mat-form-field, error-summary {
+    width: 300px;
+  
+  }
+
+}
+
+@media (max-width: 1960px) and (min-width: 421px) {
+  .wraper {
+    height: 80%;
+  }
+  
+  mat-form-field, error-summary {
+    width: 400px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
 }
 
 img {
@@ -24,27 +50,10 @@ img {
 }
 
 button {
+  margin-top: 10px;
   width: 25%;
   align-self: center;
   background-color: #248f24;
   color: white;
 }
 
-@media  (max-width: 420px) {
-  form {
-      width: 100%;
-  }
-
-}
-
-// md-card {
-//   max-width: 400px;
-//   margin: 2em auto;
-//   text-align: center;
-// }
-// .signin-content {
-//   padding: 60px 1rem;
-// }
-// .full-width-input {
-//   width: 100%;
-// }

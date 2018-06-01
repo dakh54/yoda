@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login(loginFormValue) {
-    this.auth.emailLogin(loginFormValue.email, loginFormValue.password)
+  login() {
+    this.auth.emailLogin(this.loginForm.get('email').value, this.loginForm.get('password').value)
     .then((user) => {
       this.auth.authState = user;
       
