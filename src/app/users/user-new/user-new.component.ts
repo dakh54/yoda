@@ -28,33 +28,6 @@ export class UserNewComponent implements OnInit {
   hidePassword = true;
   hidePasswordConfirmed = true;
 
-  // firstName: FormControl;
-  // lastName: FormControl;
-  // nationalId: FormControl;
-  // employeeId: FormControl;
-  // employeePosition: FormControl;
-  // primaryPhone: FormControl;
-  // secondaryPhone: FormControl;
-  // email: FormControl;
-  // homeOffice: FormControl;
-  // roles: FormControl;
-  // password: FormControl;
-  // confirmedPassword: FormControl;
-
-  // firstName: string;
-  // lastName: string;
-  // nationalId: string;
-  // employeeId: string;
-  // employeePosition: string;
-  // primaryPhone: string;
-  // secondaryPhone: string;
-  // email: string;
-  // homeOffice: string;
-  // roles: string;
-  // password: string;
-  // confirmedPassword: string;
-
-
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -75,17 +48,14 @@ export class UserNewComponent implements OnInit {
         ]],
         passwordGroup: this.fb.group(
           {
-            email: ['', [
+            password: ['', [
               Validators.required,
-              Validators.email
+              Validators.minLength(6)
             ]],
             confirmedPassword: ['', Validators.required]
-          }, { validators:  passwordMatcher }
+          }, { validator:  passwordMatcher }
         )
-
-
-
-      });
+     });
 
     // this.firstName = new string('', Validators.required);
     // this.lastName = new string('', Validators.required);
