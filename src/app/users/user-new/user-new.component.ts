@@ -41,7 +41,7 @@ export class UserNewComponent implements OnInit {
   // password: FormControl;
   // confirmedPassword: FormControl;
 
-  firstName: string;
+  // firstName: string;
   // lastName: string;
   // nationalId: string;
   // employeeId: string;
@@ -60,7 +60,7 @@ export class UserNewComponent implements OnInit {
   ngOnInit() {
     this.newEmployeeForm = this.fb.group(
       {
-        'firstName': ['', [Validators.required]],
+        firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         employeePosition: ['', [Validators.required]],
         employeeId: ['', [Validators.required]],
@@ -69,6 +69,10 @@ export class UserNewComponent implements OnInit {
         primaryPhone: '',
         secondaryPhone: '',
         roles: '',
+        email: ['', [
+          Validators.required,
+          Validators.email
+        ]],
         passwordGroup: this.fb.group(
           {
             email: ['', [

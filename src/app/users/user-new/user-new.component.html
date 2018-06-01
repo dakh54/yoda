@@ -4,7 +4,7 @@
     <div class="colum-1">
       <mat-form-field appearance="standard">
         <mat-label>First name</mat-label>
-        <input matInput placeholder="First Name" [formControlName]="firstName" required>
+        <input matInput placeholder="First Name" formControlName="firstName" required>
         <mat-error *ngIf="newEmployeeForm.get('firstName').errors.required">
           First name is
           <strong>required</strong>
@@ -13,7 +13,7 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Last name</mat-label>
-        <input matInput placeholder="Last Name" [formControlName]="lastName" required>
+        <input matInput placeholder="Last Name" formControlName="lastName" required>
         <mat-error *ngIf="newEmployeeForm.get('lastName').errors.required">
           Last name is
           <strong>required</strong>
@@ -22,7 +22,7 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Position</mat-label>
-        <mat-select placeholder="Poistion" [formControlName]="employeePosition">
+        <mat-select placeholder="Poistion" formControlName="employeePosition">
           <mat-option value="option">Option</mat-option>
         </mat-select>
         <mat-error *ngIf="newEmployeeForm.get('employeePosition').errors.required">
@@ -33,7 +33,7 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Employee Id</mat-label>
-        <input matInput placeholder="Employee id" [formControlName]="employeeId" required>
+        <input matInput placeholder="Employee id" formControlName="employeeId" required>
         <mat-error *ngIf="newEmployeeForm.get('employeeId').errors.required">
           Employee id is
           <strong>required</strong>
@@ -42,12 +42,12 @@
 
       <mat-form-field appearance="standard">
         <mat-label>National Id</mat-label>
-        <input matInput placeholder="National id" [formControlName]="nationalId">
+        <input matInput placeholder="National id" formControlName="nationalId">
       </mat-form-field>
 
       <mat-form-field appearance="standard">
         <mat-label>Home Office</mat-label>
-        <input matInput placeholder="Home office" [formControlName]="homeOffice" required>
+        <input matInput placeholder="Home office" formControlName="homeOffice" required>
         <mat-error *ngIf="newEmployeeForm.get('homeOffice').errors.required">
           Home office is
           <strong>required</strong>
@@ -57,17 +57,17 @@
     <div class="colum-2">
       <mat-form-field appearance="standard">
         <mat-label>Primary Phone</mat-label>
-        <input matInput placeholder="Primary phone" [formControlName]="primaryPhone">
+        <input matInput placeholder="Primary phone" formControlName="primaryPhone">
       </mat-form-field>
 
       <mat-form-field appearance="standard">
         <mat-label>Secondary Phone</mat-label>
-        <input matInput placeholder="Secondary phone" [formControlName]="secondaryPhone">
+        <input matInput placeholder="Secondary phone" formControlName="secondaryPhone">
       </mat-form-field>
 
       <mat-form-field appearance="standard">
         <mat-label>Roles</mat-label>
-        <mat-select placeholder="Role" [formControlName]="roles" multiple required>
+        <mat-select placeholder="Role" formControlName="roles" multiple required>
           <mat-option value="option">Option</mat-option>
         </mat-select>
         <mat-error *ngIf="newEmployeeForm.get('roles').errors.required">
@@ -78,7 +78,7 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Email</mat-label>
-        <input type="email" matInput placeholder="Email" [formControlName]="email" required>
+        <input type="email" matInput placeholder="Email" formControlName="email" required>
         <mat-error *ngIf="newEmployeeForm.get('email').errors.email && !newEmployeeForm.get('email').errors.required">
           Please enter a valid email address
         </mat-error>
@@ -90,7 +90,7 @@
 
       <div [formGroup]="passwordGroup">
         <mat-form-field appearance="standard">
-          <input [type]="hidePassword ? 'password' : 'text'" [formControlName]="password" matInput placeholder="Password" required>
+          <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput placeholder="Password" required>
           <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
           <mat-error *ngIf="newEmployeeForm.get('password').errors.passwordGroup"> Password is
             <strong>required</strong>
@@ -98,7 +98,7 @@
         </mat-form-field>
   
         <mat-form-field appearance="standard">
-          <input [type]="hidePasswordConfirmed ? 'password' : 'text'" [formControlName]="confirmedPassword" matInput placeholder="Confirm Password" required>
+          <input [type]="hidePasswordConfirmed ? 'password' : 'text'" formControlName="confirmedPassword" matInput placeholder="Confirm Password" required>
           <mat-icon matSuffix (click)="hidePasswordConfirmed = !hidePasswordConfirmed">{{hidePasswordConfirmed ? 'visibility' : 'visibility_off'}}</mat-icon>
           <mat-error *ngIf="newEmployeeForm.get('confirmedPassword').errors.passwordGroup"> Confirmed password is
             <strong>required</strong>
