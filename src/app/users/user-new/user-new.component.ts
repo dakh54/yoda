@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Iemployee } from '../../models/iemployee';
 import { FormGroup, Validators, FormBuilder, AbstractControl} from '@angular/forms';
 
+import { MyErrorStateMatcher } from '../../shared/error-state-matcher';
 
 function passwordMatcher(c: AbstractControl) {
   let passwordControl = c.get('password');
@@ -12,7 +13,7 @@ function passwordMatcher(c: AbstractControl) {
   if(passwordControl.value === confirmedPassword.value) {
     return null;
   }
-  return  { 'match': true };
+  return  { 'match': false };
 }
 
 
@@ -27,6 +28,8 @@ export class UserNewComponent implements OnInit {
   employee: Iemployee;
   hidePassword = true;
   hidePasswordConfirmed = true;
+  
+  matcher = new MyErrorStateMatcher();
 
   constructor(private fb: FormBuilder) { }
 
@@ -50,48 +53,13 @@ export class UserNewComponent implements OnInit {
           {
             password: ['', [
               Validators.required,
-              Validators.minLength(6)
+              Validators.minLength(8)
             ]],
             confirmedPassword: ['', Validators.required]
           }, { validator:  passwordMatcher }
         )
      });
-
-    // this.firstName = new string('', Validators.required);
-    // this.lastName = new string('', Validators.required);
-    // this.nationalId = new string('');
-    // this.employeeId = new string('', Validators.required);
-    // this.employeePosition = new string('', Validators.required);
-    // this.primaryPhone = new string('');
-    // this.secondaryPhone = new string();
-    // this.email = new string('', Validators.required);
-    // this.homeOffice = new string('', Validators.required);
-    // this.roles = new string('', Validators.required);
-    // this.password = new string('', [
-    //   Validators.required,
-    //   Validators.maxLength(8),
-    // ]);
-    // this.passwordConfirmed = new string('', [
-    //   Validators.required,
-    //   Validators.maxLength(8)
-    // ]);
-
-    // this.newEmployeeForm = new FormGroup(
-    //   {
-    //     firstName: this.firstName,
-    //     lastName: this.lastName,
-    //     nationalId: this.nationalId,
-    //     employeeId: this.employeeId,
-    //     employeePosition: this.employeePosition,
-    //     primaryPhone: this.primaryPhone,
-    //     secondaryPhone: this.secondaryPhone,
-    //     email: this.email,
-    //     homeOffice: this.homeOffice,
-    //     role: this.roles,
-    //     password: this.password,
-    //     passwordConfirmed: this.passwordConfirmed
-    //   }
-    // );  
+     console.log('errorMatch', this.newEmployeeForm.get('passwordGroup'));
   }
 
   getError() {
