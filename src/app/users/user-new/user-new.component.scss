@@ -38,7 +38,22 @@
   margin-right: 10px;
 }
 
+.password-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
 mat-form-field {
   width: 300px;
 }
 
+.error-message {
+  font-size: 75%;
+  color: #f44336;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  margin-top: .66667em;
+  top: calc(100% - 1.79167em);
+}

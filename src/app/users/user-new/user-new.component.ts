@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Iemployee } from '../../models/iemployee';
 import { FormGroup, Validators, FormBuilder, AbstractControl} from '@angular/forms';
-
+import { MyErrorStateMatcher, ParentErrorStateMatcher } from '../../shared/MyErrorStateMatcher';
+import { BranchService } from '../../branches/branch.service';
+import { Observable } from '@firebase/util';
+import { Ibranch } from '../../models/ibranch';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 function passwordMatcher(c: AbstractControl) {
   let passwordControl = c.get('password');
@@ -25,10 +30,21 @@ export class UserNewComponent implements OnInit {
 
   newEmployeeForm: FormGroup;
   employee: Iemployee;
+  branches: Ibranch[];
+  
   hidePassword = true;
   hidePasswordConfirmed = true;
 
-  constructor(private fb: FormBuilder) { }
+  matcher = new MyErrorStateMatcher();
+  parentMatcher = new ParentErrorStateMatcher();
+
+
+
+  constructor(
+    private fb: FormBuilder, 
+    private branchesService: BranchService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.newEmployeeForm = this.fb.group(
@@ -38,7 +54,10 @@ export class UserNewComponent implements OnInit {
         employeePosition: ['', [Validators.required]],
         employeeId: ['', [Validators.required]],
         nationalId: '',
-        homeOffice: '',
+        homeOffice: ['', [
+          Validators.required,
+          Validators.pattern(''),
+        ]],
         primaryPhone: '',
         secondaryPhone: '',
         roles: '',
@@ -50,55 +69,34 @@ export class UserNewComponent implements OnInit {
           {
             password: ['', [
               Validators.required,
-              Validators.minLength(6)
+              Validators.minLength(8)
             ]],
-            confirmedPassword: ['', Validators.required]
-          }, { validator:  passwordMatcher }
-        )
+            confirmedPassword: ['', [
+              Validators.required
+            ]]
+          }, { validator: passwordMatcher } )
      });
 
-    // this.firstName = new string('', Validators.required);
-    // this.lastName = new string('', Validators.required);
-    // this.nationalId = new string('');
-    // this.employeeId = new string('', Validators.required);
-    // this.employeePosition = new string('', Validators.required);
-    // this.primaryPhone = new string('');
-    // this.secondaryPhone = new string();
-    // this.email = new string('', Validators.required);
-    // this.homeOffice = new string('', Validators.required);
-    // this.roles = new string('', Validators.required);
-    // this.password = new string('', [
-    //   Validators.required,
-    //   Validators.maxLength(8),
-    // ]);
-    // this.passwordConfirmed = new string('', [
-    //   Validators.required,
-    //   Validators.maxLength(8)
-    // ]);
-
-    // this.newEmployeeForm = new FormGroup(
-    //   {
-    //     firstName: this.firstName,
-    //     lastName: this.lastName,
-    //     nationalId: this.nationalId,
-    //     employeeId: this.employeeId,
-    //     employeePosition: this.employeePosition,
-    //     primaryPhone: this.primaryPhone,
-    //     secondaryPhone: this.secondaryPhone,
-    //     email: this.email,
-    //     homeOffice: this.homeOffice,
-    //     role: this.roles,
-    //     password: this.password,
-    //     passwordConfirmed: this.passwordConfirmed
-    //   }
-    // );  
+     this.getBranches();
+     
   }
 
-  getError() {
 
-  }
+  getBranches() {
+    return this.branchesService.getBranches().subscribe(
+      data =>  this.branches = data,
+      error => {
+        console.log('Faile to fetch home office data ', error);
+        this.router.navigate(['/login']);
+      }
+      
+    )
+  } 
+
+
 
   save() {
-
+    console.log('valid', this.newEmployeeForm.valid);
+    console.log('invValid', this.newEmployeeForm.invalid);
   }
 }

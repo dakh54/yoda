@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
+
 import { FirebasedModule } from './shared/firebase.module';
 import { PageNotFoundComponent } from './errors/page-not-found.component';
 

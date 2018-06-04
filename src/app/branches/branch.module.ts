@@ -5,6 +5,7 @@ import { BranchRoutingModule } from './branch-routing.module';
 import { BranchNewComponent } from './branch-new/branch-new.component';
 import { BranchEditComponent } from './branch-edit/branch-edit.component';
 import { BranchListComponent } from './branch-list/branch-list.component';
+import { BranchService } from './branch.service';
 
 
 @NgModule({
@@ -12,6 +13,12 @@ import { BranchListComponent } from './branch-list/branch-list.component';
     CommonModule,
     BranchRoutingModule
   ],
-  declarations: [BranchNewComponent, BranchEditComponent, BranchListComponent]
+  providers: [
+    BranchService
+  ],
+  declarations: [
+    BranchNewComponent, 
+    BranchEditComponent, 
+    BranchListComponent]
 })
 export class BranchModule { }
