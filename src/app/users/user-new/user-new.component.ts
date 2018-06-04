@@ -97,6 +97,6 @@ export class UserNewComponent implements OnInit {
 
   save() {
     console.log('valid', this.newEmployeeForm.valid);
-    console.log('invValid', this.newEmployeeForm.invalid);
+    //console.log('invValid', this.newEmployeeForm.invalid);
   }
 }
