@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Router } from "@angular/router";
@@ -16,13 +16,23 @@ export class AuthService {
 
  
   authState: any = null;
-  
+  user: Observable<Iemployee>;
 
   constructor(private afAuth: AngularFireAuth,
-//    private db: AngularFireDatabase,
     private afs: AngularFirestore,
     private router: Router) {
     
+
+    this.user = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if(user) {
+          return this.afs.doc<Iemployee>(`User/'${user.uid}`).valueChanges()
+        } else {
+          return of(null);
+        }
+      })
+    )
+      
     // get authState when there is a change in login
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth
@@ -41,30 +51,28 @@ export class AuthService {
   
 
   // // Returns current user
-  // get currentUser(): any {
+  get currentUser(): any {
     
-  //   // if(this.authenticated) {
+    if(this.authenticated) {
+      let employeeCollection: AngularFirestoreCollection<Iemployee>;
+      employeeCollection = this.afs.collection<Iemployee>('employees', ref =>
+        ref.where('email', '==',  this.authState.user.email).where('status', '==', 'active').limit(1));
 
-  //   //   let employeeCollection: AngularFirestoreCollection<Iemployee>;
-  //   //   employeeCollection = this.afs.collection('employees', ref =>
-  //   //   {
-  //   //     return ref.where('email', '==',  this.authState.user.email).where('status', '==', 'active').limit(1);
-  //   //   });
-  
-  //   //     employeeCollection.valueChanges().subscribe(
-  //   //       data => { 
-  //   //         return data[0]; 
-  //   //       },
-  //   //       error => { return 'error data user' }
-  //   //     )
-  //   //   } else {
-  //   //     return null;
-  //   //   }
+        employeeCollection.valueChanges().subscribe(
+          data => { 
+            console.log('data[0]', data[0]);
+            return data[0]; 
+          },
+          error => { return 'error data user' }
+        )
+      } else {
+        return null;
+      }
     
 
     
   //   return this.authenticated ? this.authState.auth : null;
-  // }
+  }
 
   // Returns current user UID
   get currentUserId(): string {

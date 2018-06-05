@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -35,8 +36,11 @@ export class LoginComponent implements OnInit {
     this.auth.emailLogin(this.loginForm.get('email').value, this.loginForm.get('password').value)
     .then((user) => {
       this.auth.authState = user;
-      
-      console.log('userId', this.auth.authState);
+      this.auth.user.pipe(
+        map(user => console.log('userInAuthServic', this.auth.user))
+      )
+          
+   
       
       this.error = null;
       this.router.navigate(['/users']);

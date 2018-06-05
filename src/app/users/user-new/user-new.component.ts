@@ -4,9 +4,14 @@ import { FormGroup, Validators, FormBuilder, AbstractControl} from '@angular/for
 import { MyErrorStateMatcher, ParentErrorStateMatcher } from '../../shared/MyErrorStateMatcher';
 import { BranchService } from '../../branches/branch.service';
 import { Observable } from '@firebase/util';
-import { Ibranch } from '../../models/ibranch';
+import { Ibranch, Irole } from '../../models/index-models';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Iposition } from '../../models/iposition';
+import { PositionService } from '../../positions/position.service';
+import { RoleService } from '../../roles/role.service';
+import { AuthService } from '../../auth/auth.service';
+
 
 function passwordMatcher(c: AbstractControl) {
   let passwordControl = c.get('password');
@@ -31,7 +36,9 @@ export class UserNewComponent implements OnInit {
   newEmployeeForm: FormGroup;
   employee: Iemployee;
   branches: Ibranch[];
-  
+  positions: Iposition [];
+  roles: Irole[];
+
   hidePassword = true;
   hidePasswordConfirmed = true;
 
@@ -43,7 +50,10 @@ export class UserNewComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private branchesService: BranchService,
-    private router: Router
+    private router: Router,
+    private positionService: PositionService,
+    private roleService: RoleService,
+    private auth: AuthService    
   ) { }
 
   ngOnInit() {
@@ -51,16 +61,22 @@ export class UserNewComponent implements OnInit {
       {
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
-        employeePosition: ['', [Validators.required]],
+        employeePosition: ['', [
+          Validators.required,
+          Validators.pattern('')
+        ]],
         employeeId: ['', [Validators.required]],
         nationalId: '',
         homeOffice: ['', [
           Validators.required,
-          Validators.pattern(''),
+          Validators.pattern('')
         ]],
         primaryPhone: '',
         secondaryPhone: '',
-        roles: '',
+        roles: ['', [
+          Validators.required,
+          Validators.pattern('')
+        ]],
         email: ['', [
           Validators.required,
           Validators.email
@@ -78,7 +94,9 @@ export class UserNewComponent implements OnInit {
      });
 
      this.getBranches();
-     
+     this.getPositions();
+     this.getRoles();
+
   }
 
 
@@ -86,14 +104,36 @@ export class UserNewComponent implements OnInit {
     return this.branchesService.getBranches().subscribe(
       data =>  this.branches = data,
       error => {
-        console.log('Faile to fetch home office data ', error);
-        this.router.navigate(['/login']);
+        console.log('Failed to fetch home office data ', error);
+        this.router.navigate(['/page-not-found']);
       }
       
     )
   } 
 
 
+  getPositions() {
+    return this.positionService.getPositions().subscribe(
+      data =>  this.positions = data,
+      error => {
+        console.log('Failed to fetch employee position data ', error);
+        this.router.navigate(['/page-not-found']);
+      }
+      
+    )
+  }
+
+
+  getRoles() {
+    return this.roleService.getRoles().subscribe(
+      data =>  this.roles = data,
+      error => {
+        console.log('Failed to fetch employee role data ', error);
+        this.router.navigate(['/page-not-found']);
+      }
+      
+    )
+  }
 
   save() {
     console.log('valid', this.newEmployeeForm.valid);

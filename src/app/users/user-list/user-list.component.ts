@@ -13,7 +13,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     
-    console.log('userList', this.auth.authState);
+    
     
   }
 

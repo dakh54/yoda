@@ -7,6 +7,8 @@ import { AppMaterialModule } from '../shared/app-material.module';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BranchService } from '../branches/branch.service';
+import { PositionService } from '../positions/position.service';
+import { RoleService } from '../roles/role.service';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { BranchService } from '../branches/branch.service';
     
   ],
   providers:[
-    BranchService
+    BranchService,
+    PositionService,
+    RoleService
   ],
   declarations: [
     UserListComponent, 
