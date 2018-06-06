@@ -28,6 +28,10 @@ export class AuthService {
     // get authState when there is a change in login
     this.afAuth.authState.subscribe(auth => {
       this.authState = auth;
+      if(this.authState) {
+        
+      }
+
       console.log('inAuthService', this.authState.uid);
     });
   }
