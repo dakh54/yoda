@@ -7,7 +7,7 @@ import {
   AngularFirestoreCollection
 } from "angularfire2/firestore";
 import { Router } from "@angular/router";
-import * as firebase from "firebase/app";
+// import * as firebase from "firebase/app";
 
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
@@ -18,27 +18,45 @@ import { Iemployee } from "../models/iemployee";
 })
 export class AuthService {
   authState: any = null;
-  employee: Iemployee;
+  employee: Observable<Iemployee>;
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
-    // get authState when there is a change in login
-    this.afAuth.authState.subscribe(auth => {
-      this.authState = auth;
-      if(this.authState) {
-        
-      }
 
-      console.log('inAuthService', this.authState.uid);
-    });
+    this.employee = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.afs.doc<Iemployee>(`employees/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    )
+
+    // // get authState when there is a change in login
+    // this.afAuth.authState.subscribe(auth => {
+    //   this.authState = auth;
+    //   if(this.authState) {
+        
+    //   }
+
+      
+    // });
   }
 
+  // emailLogin(email: string, password: string) {
+  //   return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  // }
+
+  
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
+
+ 
 
   // Returns true if user is logged in
   get authenticated(): boolean {
@@ -49,7 +67,12 @@ export class AuthService {
 
   // }
 
+  createUser(email: string, password: string){
+    console.log('email', email);
+    console.log('password', password);
 
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
   // // Returns current user
   // get currentUser(): any {
   //   if (this.authenticated) {

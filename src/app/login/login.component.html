@@ -1,26 +1,86 @@
 <div class="wraper">
-  <form class="center-page" autocomplete="off" novalidate [formGroup]="loginForm" (ngSubmit)="login()" >
-    <img src="assets/img/flat-avatar.png" />
-    <h1 class="title">LORI</h1>
+  <form class="center-page" *ngIf="!isActivateAccount" autocomplete="off" novalidate [formGroup]="loginForm" (ngSubmit)="login()">
+    <img [src]="imgSrc"  />
+    <h1 class="title">Sign in</h1>
     <mat-form-field>
-      <input type="email" matInput placeholder="Email" [formControl]="email" required>
-      <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
-          Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="email.hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error>
+      <input type="email" matInput placeholder="Email" formControlName="email" required [errorStateMatcher]="matcher">
+      <mat-error *ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('email').hasError('required')">
+        Email is
+        <strong>required</strong>
+      </mat-error>
     </mat-form-field>
-  
+
     <mat-form-field>
-      <input type="password" [formControl]="password" matInput placeholder="Password" required>
-      <mat-error *ngIf="password.hasError('required')">Please enter password</mat-error>
+      <input type="password" formControlName="password" matInput placeholder="Password" required [errorStateMatcher]="matcher">
+      <mat-error *ngIf="loginForm.get('password').hasError('required')">Please enter password</mat-error>
     </mat-form-field>
-    <mat-error class="error-summary" *ngIf="error">Invalid login.</mat-error>
-    <button mat-raised-button type="submit" [disabled]="loginForm.invalid"> Log in </button>
+
+    <mat-error class="error-summary" *ngIf="error">Invalid login</mat-error>
+    <div class="btn-action">
+     <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="loginForm.invalid"> Log in </button>
+      <a mat-raised-button color="accent" (click)="toggleActivateAccount()" matTooltip="Activate an account">Activate</a>
+    </div>
+  </form>
+
+  <!-- activate account -->
+  <form class="center-page" *ngIf="isActivateAccount" autocomplete="off" novalidate [formGroup]="activateForm" (ngSubmit)="activateAccount()">
+    <img [src]="imgSrc" />
+    <h1 class="title">Account Activation</h1>
+
+    <!-- activate email -->
+    <mat-form-field>
+      <input type="email" matInput placeholder="Email" formControlName="activateEmail" required [errorStateMatcher]="matcher">
+      <mat-error *ngIf="activateForm.get('activateEmail').hasError('email') && !activateForm.get('activateEmail').hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="activateForm.get('activateEmail').hasError('required')">
+        Email is
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- password group -->
+    <div formGroupName="passwordGroup" class="password-group">
+
+      <!-- password -->
+      <mat-form-field appearance="standard">
+        <input [type]="hidePassword ? 'password' : 'text'" formControlName="activatePassword" matInput placeholder="Password" required [errorStateMatcher]="matcher">
+        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="activateForm.get('passwordGroup').invalid && activateForm.get('passwordGroup.activatePassword').hasError('required')">
+          Password is
+          <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="activateForm.get('passwordGroup').invalid && activateForm.get('passwordGroup.activatePassword').hasError('minlength')">
+          Password is
+          <strong> 8 </strong> characters minimums.
+        </mat-error>
+
+      </mat-form-field>
+
+      <!-- confirm password -->
+      <mat-form-field appearance="standard">
+        <input [type]="hidePasswordConfirmed ? 'password' : 'text'" formControlName="activateConfirmedPassword" matInput placeholder="Confirm Password"
+          required [errorStateMatcher]="parentMatcher">
+        <mat-icon matSuffix (click)="hidePasswordConfirmed = !hidePasswordConfirmed">{{hidePasswordConfirmed ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="activateForm.get('passwordGroup').hasError('match') &&
+        !activateForm.get('passwordGroup.activateConfirmedPassword').errors"> Password does not
+          <strong>match</strong>
+        </mat-error>
+        <mat-error *ngIf="activateForm.get('passwordGroup.activateConfirmedPassword').hasError('required')"> Password is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-error class="error-summary" *ngIf="error">Failed to activate</mat-error>
+    <div class="btn-action">
+      <button mat-raised-button type="submit" class="submit-button" color="warn" [disabled]="activateForm.invalid"> Activate </button>
+      <a mat-raised-button type="button" color="primary" matTooltip="Go back to login" (click)="toggleActivateAccount()"> Back to login  </a>
+    </div>
   </form>
 </div>
-
-
-
-

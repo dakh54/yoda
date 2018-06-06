@@ -11,7 +11,9 @@ import {
   MatMenuModule,
   MatListModule,
   MatSelectModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatCheckboxModule,
+  MatTooltipModule
  } from '@angular/material';
 
 @NgModule({
@@ -26,7 +28,9 @@ import {
     MatMenuModule,
     MatListModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatTooltipModule
   ]
 })
 export class AppMaterialModule {}

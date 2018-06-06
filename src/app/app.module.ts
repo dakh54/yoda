@@ -6,8 +6,6 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import { AppMaterialModule } from './shared/app-material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuard } from './auth/auth.guard';
-import { AuthService } from './auth/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
@@ -44,8 +42,6 @@ import { PageNotFoundComponent } from './errors/page-not-found.component';
     FirebasedModule
   ],
   providers: [
-    AuthService,
-    AuthGuard,
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
   ],
   bootstrap: [AppComponent]

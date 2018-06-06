@@ -24,10 +24,10 @@
       </mat-form-field>
 
       <!-- position -->
-      <mat-form-field appearance="standard">
+      <!-- <mat-form-field appearance="standard">
         <mat-label>Position</mat-label>
         <mat-select placeholder="Poistion" formControlName="employeePosition" [errorStateMatcher]="matcher">
-          <mat-option *ngFor="let position of positions" [value]="position.id">
+          <mat-option *ngFor="let position of positions" [value]="position.name">
             {{ position.name }}
           </mat-option>
         </mat-select>
@@ -40,6 +40,24 @@
           Your selection is invalid
         </mat-error>
 
+      </mat-form-field> -->
+
+      <!-- application role -->
+      <mat-form-field appearance="standard">
+        <mat-label>Roles</mat-label>
+        <mat-select placeholder="Role" formControlName="roles" required>
+          <mat-option *ngFor="let role of roles" [value]="role.name">
+            {{ role.name }}
+          </mat-option>
+        </mat-select>
+        <mat-hint></mat-hint>
+        <mat-error *ngIf="newEmployeeForm.get('roles').hasError('required')">
+          Role is
+          <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="newEmployeeForm.get('roles').hasError('pattern') && !newEmployeeForm.get('roles').hasError('required')">
+          Your selection is invalid
+        </mat-error>
       </mat-form-field>
 
       <!-- employee id -->
@@ -61,7 +79,7 @@
       <!-- home office -->
       <mat-form-field appearance="standard">
         <mat-select placeholder="Home Office" formControlName="homeOffice" [errorStateMatcher]="matcher" required>
-          <mat-option *ngFor="let branch of branches" [value]="branch.id">
+          <mat-option *ngFor="let branch of branches" [value]="branch.name">
             {{ branch.name }}
           </mat-option>
         </mat-select>
@@ -91,30 +109,12 @@
         <input matInput placeholder="Secondary phone" formControlName="secondaryPhone">
       </mat-form-field>
 
-      <!-- application role -->
-      <mat-form-field appearance="standard">
-        <mat-label>Roles</mat-label>
-        <mat-select placeholder="Role" formControlName="roles" multiple required required>
-            <mat-option *ngFor="let role of roles" [value]="role.id">
-                {{ role.name }}
-              </mat-option>
-        </mat-select>
-        <mat-hint></mat-hint>
-        <mat-error *ngIf="newEmployeeForm.get('roles').hasError('required')">
-          Role is
-          <strong>required</strong>
-        </mat-error>
-        <mat-error *ngIf="newEmployeeForm.get('roles').hasError('pattern') && !newEmployeeForm.get('roles').hasError('required')">
-          Your selection is invalid
-        </mat-error>
-      </mat-form-field>
-
       <!-- email -->
       <mat-form-field appearance="standard">
         <mat-label>Email</mat-label>
         <input type="email" matInput placeholder="Email" formControlName="email" required [errorStateMatcher]="matcher">
         <mat-hint></mat-hint>
-        <mat-error *ngIf="newEmployeeForm.get('email').invalid && !newEmployeeForm.get('email').errors?.required">
+        <mat-error *ngIf="newEmployeeForm.get('email').invalid && !newEmployeeForm.get('email').hasError('required')">
           Please enter a valid email address
         </mat-error>
         <mat-error *ngIf="newEmployeeForm.get('email').hasError('required')">
@@ -155,20 +155,28 @@
           <mat-error *ngIf="newEmployeeForm.get('passwordGroup.confirmedPassword').hasError('required')"> Password is
             <strong>required</strong>
           </mat-error>
-
         </mat-form-field>
+
+        <div class="footer">
+          <button mat-raised-button>
+            <mat-icon>cancel</mat-icon> Cancel
+          </button>
+          <button mat-raised-button color="primary">
+            <mat-icon>save</mat-icon> Save
+          </button>
+        </div>
       </div>
 
     </div>
 
-    <div class="footer">
+    <!-- <div class="footer">
       <button mat-raised-button>
         <mat-icon>cancel</mat-icon> Cancel
       </button>
       <button mat-raised-button color="primary">
         <mat-icon>save</mat-icon> Save
       </button>
-    </div>
+    </div> -->
 
   </div>
 
