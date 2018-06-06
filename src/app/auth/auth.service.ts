@@ -1,41 +1,34 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Injectable } from "@angular/core";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { AngularFireAuth } from "angularfire2/auth";
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+  AngularFirestoreCollection
+} from "angularfire2/firestore";
 import { Router } from "@angular/router";
-import * as firebase from 'firebase/app';
+import * as firebase from "firebase/app";
 
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators'
-import { Iemployee } from '../models/iemployee';
+import { Observable, of } from "rxjs";
+import { switchMap } from "rxjs/operators";
+import { Iemployee } from "../models/iemployee";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthService {
-
- 
   authState: any = null;
-  user: Observable<Iemployee>;
+  employee: Iemployee;
 
-  constructor(private afAuth: AngularFireAuth,
+  constructor(
+    private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router) {
-    
-
-    this.user = this.afAuth.authState.pipe(
-      switchMap(user => {
-        if(user) {
-          return this.afs.doc<Iemployee>(`User/'${user.uid}`).valueChanges()
-        } else {
-          return of(null);
-        }
-      })
-    )
-      
+    private router: Router
+  ) {
     // get authState when there is a change in login
-    this.afAuth.authState.subscribe((auth) => {
-      this.authState = auth
+    this.afAuth.authState.subscribe(auth => {
+      this.authState = auth;
+      console.log('inAuthService', this.authState.uid);
     });
   }
 
@@ -48,35 +41,41 @@ export class AuthService {
     return this.authState !== null;
   }
 
-  
+  // getUser(): Observable<Iemployee> {
+
+  // }
+
 
   // // Returns current user
-  get currentUser(): any {
-    
-    if(this.authenticated) {
-      let employeeCollection: AngularFirestoreCollection<Iemployee>;
-      employeeCollection = this.afs.collection<Iemployee>('employees', ref =>
-        ref.where('email', '==',  this.authState.user.email).where('status', '==', 'active').limit(1));
+  // get currentUser(): any {
+  //   if (this.authenticated) {
+  //     let employeeCollection: AngularFirestoreCollection<Iemployee>;
+  //     employeeCollection = this.afs.collection<Iemployee>("employees", ref =>
+  //       ref
+  //         .where("email", "==", this.authState.user.email)
+  //         .where("status", "==", "active")
+  //         .limit(1)
+  //     );
 
-        employeeCollection.valueChanges().subscribe(
-          data => { 
-            console.log('data[0]', data[0]);
-            return data[0]; 
-          },
-          error => { return 'error data user' }
-        )
-      } else {
-        return null;
-      }
-    
+  //     employeeCollection.valueChanges().subscribe(
+  //       data => {
+  //         console.log("data[0]", data[0]);
+  //         return data[0];
+  //       },
+  //       error => {
+  //         return "error data user";
+  //       }
+  //     );
+  //   } else {
+  //     return null;
+  //   }
 
-    
-  //   return this.authenticated ? this.authState.auth : null;
-  }
+  //   //   return this.authenticated ? this.authState.auth : null;
+  // }
 
   // Returns current user UID
   get currentUserId(): string {
-    return this.authenticated ? this.authState.uid : '';
+    return this.authenticated ? this.authState.uid : "";
   }
 
   //  // Sends email allowing user to reset password
@@ -88,13 +87,11 @@ export class AuthService {
   //      .catch((error) => console.log(error))
   //  }
 
-
-   //// Sign Out ////
-   signOut(): void {
-     this.afAuth.auth.signOut();
-     this.router.navigate(['/'])
-   }
-
+  //// Sign Out ////
+  signOut(): void {
+    this.afAuth.auth.signOut();
+    this.router.navigate(["/"]);
+  }
 
   //  //// Helpers ////
   //  private updateUserData(): void {
@@ -111,9 +108,6 @@ export class AuthService {
 
   //  }
 }
-
-
-
 
 // import { Injectable } from '@angular/core';
 // import { Router } from '@angular/router';

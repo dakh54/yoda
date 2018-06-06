@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BranchService } from '../branches/branch.service';
 import { PositionService } from '../positions/position.service';
 import { RoleService } from '../roles/role.service';
+import { UserService } from './user.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { RoleService } from '../roles/role.service';
   providers:[
     BranchService,
     PositionService,
-    RoleService
+    RoleService,
+    UserService
   ],
   declarations: [
     UserListComponent, 

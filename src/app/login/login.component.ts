@@ -36,10 +36,8 @@ export class LoginComponent implements OnInit {
     this.auth.emailLogin(this.loginForm.get('email').value, this.loginForm.get('password').value)
     .then((user) => {
       this.auth.authState = user;
-      this.auth.user.pipe(
-        map(user => console.log('userInAuthServic', this.auth.user))
-      )
-          
+       console.log('inLoginComponent-authState', this.auth.authState);
+       console.log('inLoginComponent-user', user);
    
       
       this.error = null;
