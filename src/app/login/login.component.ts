@@ -94,7 +94,11 @@ export class LoginComponent implements OnInit {
         // )
 
       this.error = null;
+      
+
       this.router.navigate(['/users']);
+
+      
     })
     .catch(err => this.error = err);
   }
@@ -105,6 +109,12 @@ export class LoginComponent implements OnInit {
 
   toggleActivateAccount() {
     this.isActivateAccount = !this.isActivateAccount;
+
+    if(this.isActivateAccount) {
+      this.activateForm.reset();
+    } else {
+      this.loginForm.reset();
+    }
   }
   
 }

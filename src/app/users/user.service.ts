@@ -32,6 +32,14 @@ export class UserService {
     return this.employeeCollection.valueChanges();
   }
 
+  existedEmail(email: string) {
+  }
+
+  getTakenEmails(){
+    return this.db.collection('emailTaken').valueChanges();
+  }
+
+
   getEmployee(userId: string)  {
      
     return this.db.doc(`employees/${userId}`).valueChanges();

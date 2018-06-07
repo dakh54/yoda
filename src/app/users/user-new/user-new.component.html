@@ -23,29 +23,13 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- position -->
-      <!-- <mat-form-field appearance="standard">
-        <mat-label>Position</mat-label>
-        <mat-select placeholder="Poistion" formControlName="employeePosition" [errorStateMatcher]="matcher">
-          <mat-option *ngFor="let position of positions" [value]="position.name">
-            {{ position.name }}
-          </mat-option>
-        </mat-select>
-        <mat-hint></mat-hint>
-        <mat-error *ngIf="newEmployeeForm.get('employeePosition').hasError('required')">
-          Position is
-          <strong>required</strong>
-        </mat-error>
-        <mat-error *ngIf="newEmployeeForm.get('employeePosition').hasError('pattern') && !newEmployeeForm.get('employeePosition').hasError('required')">
-          Your selection is invalid
-        </mat-error>
 
-      </mat-form-field> -->
+
 
       <!-- application role -->
       <mat-form-field appearance="standard">
         <mat-label>Roles</mat-label>
-        <mat-select placeholder="Role" formControlName="roles" required>
+        <mat-select placeholder="Role" formControlName="roles" required [errorStateMatcher]="matcher">
           <mat-option *ngFor="let role of roles" [value]="role.name">
             {{ role.name }}
           </mat-option>
@@ -62,18 +46,12 @@
 
       <!-- employee id -->
       <mat-form-field appearance="standard">
-        <mat-label>Employee Id</mat-label>
+        <mat-label>Employee Id / CO Code</mat-label>
         <input matInput placeholder="Employee id" formControlName="employeeId" required>
         <mat-error *ngIf="newEmployeeForm.get('employeeId').hasError('required')">
           Employee id is
           <strong>required</strong>
         </mat-error>
-      </mat-form-field>
-
-      <!-- national id -->
-      <mat-form-field appearance="standard">
-        <mat-label>National Id</mat-label>
-        <input matInput placeholder="National id" formControlName="nationalId">
       </mat-form-field>
 
       <!-- home office -->
@@ -96,6 +74,11 @@
 
 
     <div class="colum-2">
+      <!-- national id -->
+      <mat-form-field appearance="standard">
+        <mat-label>National Id</mat-label>
+        <input matInput placeholder="National id" formControlName="nationalId">
+      </mat-form-field>
 
       <!-- primary phone -->
       <mat-form-field appearance="standard">
@@ -123,60 +106,18 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- password group -->
-      <div formGroupName="passwordGroup" class="password-group">
-
-        <!-- password -->
-        <mat-form-field appearance="standard">
-          <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput placeholder="Password" required [errorStateMatcher]="matcher">
-          <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-hint></mat-hint>
-          <mat-error *ngIf="newEmployeeForm.get('passwordGroup').invalid && newEmployeeForm.get('passwordGroup.password').hasError('required')">
-            Password is
-            <strong>required</strong>
-          </mat-error>
-          <mat-error *ngIf="newEmployeeForm.get('passwordGroup').invalid && newEmployeeForm.get('passwordGroup.password').hasError('minlength')">
-            Password is
-            <strong> 8 </strong> characters minimums.
-          </mat-error>
-
-        </mat-form-field>
-
-        <!-- confirm password -->
-        <mat-form-field appearance="standard">
-          <input [type]="hidePasswordConfirmed ? 'password' : 'text'" formControlName="confirmedPassword" matInput placeholder="Confirm Password"
-            required [errorStateMatcher]="parentMatcher">
-          <mat-icon matSuffix (click)="hidePasswordConfirmed = !hidePasswordConfirmed">{{hidePasswordConfirmed ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-hint></mat-hint>
-          <mat-error *ngIf="newEmployeeForm.get('passwordGroup').hasError('match') &&
-            !newEmployeeForm.get('passwordGroup.confirmedPassword').errors"> Password does not
-            <strong>match</strong>
-          </mat-error>
-          <mat-error *ngIf="newEmployeeForm.get('passwordGroup.confirmedPassword').hasError('required')"> Password is
-            <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <div class="footer">
-          <button mat-raised-button>
-            <mat-icon>cancel</mat-icon> Cancel
-          </button>
-          <button mat-raised-button color="primary">
-            <mat-icon>save</mat-icon> Save
-          </button>
-        </div>
+      <div class="footer">
+        <button mat-raised-button>
+          <mat-icon>cancel</mat-icon> Cancel
+        </button>
+        <button mat-raised-button color="primary">
+          <mat-icon>save</mat-icon> Save
+        </button>
       </div>
 
     </div>
 
-    <!-- <div class="footer">
-      <button mat-raised-button>
-        <mat-icon>cancel</mat-icon> Cancel
-      </button>
-      <button mat-raised-button color="primary">
-        <mat-icon>save</mat-icon> Save
-      </button>
-    </div> -->
+   
 
   </div>
 

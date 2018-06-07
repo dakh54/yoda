@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Iemployee } from '../../models/iemployee';
-import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl, COMPOSITION_BUFFER_MODE } from '@angular/forms';
 import { MyErrorStateMatcher } from '../../shared/MyErrorStateMatcher';
 import { BranchService } from '../../branches/branch.service';
 import { Observable } from '@firebase/util';
@@ -8,7 +8,6 @@ import { Ibranch, Irole } from '../../models/index-models';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Iposition } from '../../models/iposition';
-import { PositionService } from '../../positions/position.service';
 import { RoleService } from '../../roles/role.service';
 import { AuthService } from '../../auth/auth.service';
 
@@ -50,10 +49,6 @@ export class UserNewComponent implements OnInit {
       {
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
-        // employeePosition: ['', [
-        //   Validators.required,
-        //   Validators.pattern('')
-        // ]],
         employeeId: ['', [Validators.required]],
         nationalId: '',
         homeOffice: ['', [
@@ -69,17 +64,8 @@ export class UserNewComponent implements OnInit {
         email: ['', [
           Validators.required,
           Validators.email
-        ]],
-        passwordGroup: this.fb.group(
-          {
-            password: ['', [
-              Validators.required,
-              Validators.minLength(8)
-            ]],
-            confirmedPassword: ['', [
-              Validators.required
-            ]]
-          }, { validator: passwordMatcher })
+        ]]
+      
       });
 
     this.getBranches();
@@ -88,6 +74,10 @@ export class UserNewComponent implements OnInit {
 
   }
 
+
+  existedEmail(email: string) {
+    
+  }
 
   getBranches() {
     return this.branchesService.getBranches().subscribe(
