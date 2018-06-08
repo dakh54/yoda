@@ -12,6 +12,7 @@ import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { Iemployee } from "../models/iemployee";
+import { User } from "@firebase/auth-types";
 
 @Injectable({
   providedIn: "root"
@@ -29,7 +30,7 @@ export class AuthService {
     this.employee = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          return this.afs.doc<Iemployee>(`employees/${user.uid}`).valueChanges();
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }

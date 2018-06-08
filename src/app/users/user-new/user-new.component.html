@@ -7,7 +7,7 @@
       <mat-form-field appearance="standard">
         <mat-label>First name</mat-label>
         <input matInput placeholder="First Name" formControlName="firstName" required>
-        <mat-error *ngIf="newEmployeeForm.get('firstName').hasError('required')">
+        <mat-error *ngIf="firstNameCtrl.hasError('required')">
           First name is
           <strong>required</strong>
         </mat-error>
@@ -17,14 +17,11 @@
       <mat-form-field appearance="standard">
         <mat-label>Last name</mat-label>
         <input matInput placeholder="Last Name" formControlName="lastName" required>
-        <mat-error *ngIf="newEmployeeForm.get('lastName').hasError('required')">
+        <mat-error *ngIf="lastNameCtrl.hasError('required')">
           Last name is
           <strong>required</strong>
         </mat-error>
       </mat-form-field>
-
-
-
 
       <!-- application role -->
       <mat-form-field appearance="standard">
@@ -35,11 +32,11 @@
           </mat-option>
         </mat-select>
         <mat-hint></mat-hint>
-        <mat-error *ngIf="newEmployeeForm.get('roles').hasError('required')">
+        <mat-error *ngIf="rolesCtrl.hasError('required')">
           Role is
           <strong>required</strong>
         </mat-error>
-        <mat-error *ngIf="newEmployeeForm.get('roles').hasError('pattern') && !newEmployeeForm.get('roles').hasError('required')">
+        <mat-error *ngIf="rolesCtrl.hasError('pattern') && !rolesCtrl.hasError('required')">
           Your selection is invalid
         </mat-error>
       </mat-form-field>
@@ -48,7 +45,7 @@
       <mat-form-field appearance="standard">
         <mat-label>Employee Id / CO Code</mat-label>
         <input matInput placeholder="Employee id" formControlName="employeeId" required>
-        <mat-error *ngIf="newEmployeeForm.get('employeeId').hasError('required')">
+        <mat-error *ngIf="employeeIdCtrl.hasError('required')">
           Employee id is
           <strong>required</strong>
         </mat-error>
@@ -62,11 +59,11 @@
           </mat-option>
         </mat-select>
         <mat-hint></mat-hint>
-        <mat-error *ngIf="newEmployeeForm.get('homeOffice').hasError('required')">
+        <mat-error *ngIf="homeOfficeCtrl.hasError('required')">
           Home office is
           <strong>required</strong>
         </mat-error>
-        <mat-error *ngIf="newEmployeeForm.get('homeOffice').hasError('pattern') && !newEmployeeForm.get('homeOffice').hasError('required')">
+        <mat-error *ngIf="homeOfficeCtrl.hasError('pattern') && !homeOfficeCtrl.hasError('required')">
           Your selection is invalid
         </mat-error>
       </mat-form-field>
@@ -97,14 +94,20 @@
         <mat-label>Email</mat-label>
         <input type="email" matInput placeholder="Email" formControlName="email" required [errorStateMatcher]="matcher">
         <mat-hint></mat-hint>
-        <mat-error *ngIf="newEmployeeForm.get('email').invalid && !newEmployeeForm.get('email').hasError('required')">
+
+        <mat-error *ngIf="!emailCtrl.hasError('email') && !emailCtrl.invalid && !emailCtrl.hasError('required')">
+          Email address is already taken
+        </mat-error>
+
+        <mat-error *ngIf="emailCtrl.hasError('email') && !emailCtrl.hasError('required')">
           Please enter a valid email address
         </mat-error>
-        <mat-error *ngIf="newEmployeeForm.get('email').hasError('required')">
+        <mat-error *ngIf="emailCtrl.hasError('required')">
           Email is
           <strong>required</strong>
         </mat-error>
       </mat-form-field>
+
 
       <div class="footer">
         <button mat-raised-button>
@@ -116,10 +119,38 @@
       </div>
 
     </div>
+   </div>
 
-   
+   <p>
+    emailr: {{emailCtrl.value}}
+  </p>
+   <p>
+    email-has-error(email'): {{emailCtrl.hasError('email')}}
+  </p>
+  <p>
+    <!-- email exist-getError: {{newEmployeeForm.get('email').errors.exist}} -->
+    email-is-valid: {{emailCtrl.valid}}
+  </p>
+  <p>
+    email-has-error-exist {{emailCtrl.hasError('exist')}}
+  </p>
+ 
+  <p>
+    email-pending {{emailCtrl.pending}}
+  </p>
 
+  <div *ngIf="emailCtrl.pending">
+    Hold tight ... Checking availability of {{emailCtrl.value}}
   </div>
 
+  <div >
+    ERROR {{emailCtrl.errors?.exist}}
+  </div>
 
+  <div>
+    <!-- <input type="email" matInput placeholder="Email" formControlName="email"> -->
+    <div  *ngIf="emailCtrl.pending">
+        Hold tight ... Checking availability of {{emailCtrl.value}}
+        </div>
+  </div>
 </form>

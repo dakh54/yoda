@@ -21,6 +21,7 @@ import { PageNotFoundComponent } from './errors/page-not-found.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { PageNotFoundComponent } from './errors/page-not-found.component';
     LoginLayoutComponent,
     HeaderComponent,
     PageNotFoundComponent
+    
     
   ],
   imports: [

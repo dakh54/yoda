@@ -84,8 +84,8 @@ export class LoginComponent implements OnInit {
     .then((employee) => {
       this.auth.authState = employee;
        
-       console.log('inLoginComponent-user-uid', employee.user.uid);
-                
+      //  console.log('inLoginComponent-user-uid', employee.user.uid);
+      //  console.log('inLoginComponent-user', employee);
       
         // this.userService.getEmployee('LtySLveum6o4sVHkpojQ');
         // this.userService.getEmployee('LtySLveum6o4sVHkpojQ'

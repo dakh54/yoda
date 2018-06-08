@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import * as firebase from "firebase/app";
 
 import { Iemployee } from '../models/index-models';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +42,11 @@ export class UserService {
   getEmployee(userId: string)  {
      
     return this.db.doc(`employees/${userId}`).valueChanges();
+  }
+
+  addNewEmployee(employee: Iemployee) {
+    employee.email = employee.email.toLocaleLowerCase();
+    employee.status = 'Active';
+    return this.employeeCollection.doc(employee.email).set(employee);
   }
 }
