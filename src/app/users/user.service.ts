@@ -34,8 +34,15 @@ export class UserService {
   }
 
   addNewEmployee(employee: Iemployee) {
-    employee.email = employee.email.toLocaleLowerCase();
+    employee.email = employee.email.toLowerCase();
     employee.status = 'Active';
-    return this.employeeCollection.doc(employee.email).set(employee);
+    return this.employeeCollection.doc(employee.email).set({ employee }, { merge: true });
+    
   }
+
+  // updateEmployeeUid(employee: Iemployee, newUid: string) {
+  //   return this.employeeCollection.doc(employee.email).set({
+  //     uid: newUid
+  //   }, { merge: true });
+  // }
 }

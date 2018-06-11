@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Iemployee } from '../../models/iemployee';
-import { FormGroup, Validators, FormBuilder, AbstractControl, ValidatorFn, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MyErrorStateMatcher } from '../../shared/MyErrorStateMatcher';
 import { BranchService } from '../../branches/branch.service';
 import { Ibranch, Irole } from '../../models/index-models';
@@ -10,6 +10,8 @@ import { AuthService } from '../../auth/auth.service';
 import { UserService } from '../user.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { CustomValidator } from '../../shared/custom-validator';
+
+import * as firebase from 'firebase';
 
 
 
@@ -158,15 +160,18 @@ export class UserNewComponent implements OnInit {
 
       // use ForkJoin and subscribe for value
 
-      this.userService.addNewEmployee(employee).then(
-        success => {
-          console.log('User added', success);
-          this.userService.getEmployee(employee.email).subscribe(
-            emp => console.log('employee-createe', emp)
-          )
-        },
-        err => console.log('Failed to create new user', err)
-      )
+      employee.createBy = this.auth.authState.user.email;
+      employee.createAt = firebase.database.ServerValue.TIMESTAMP;
+
+      console.log('jsonString', JSON.stringify(firebase.database.ServerValue.TIMESTAMP))
+
+      // this.userService.addNewEmployee(employee).then(
+      //   success => {
+      //     console.log('User added', success);
+      //     this.newEmployeeForm.reset();
+      //   },
+      //   err => console.log('Failed to create new user', err)
+      // )
  
             console.log('employee', employee);
             console.log('----------------------------------------------');

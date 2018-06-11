@@ -30,7 +30,7 @@ export class AuthService {
     this.employee = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+            return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
@@ -71,6 +71,10 @@ export class AuthService {
   createUser(email: string, password: string){
       return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
+
+  // sendVerificationEmail(user: any) {
+  //   return user.sendVerificationEmail();
+  // }
   // // Returns current user
   // get currentUser(): any {
   //   if (this.authenticated) {
@@ -115,7 +119,7 @@ export class AuthService {
   //// Sign Out ////
   signOut(): void {
     this.afAuth.auth.signOut();
-    this.router.navigate(["/"]);
+    // this.router.navigate(["/"]);
   }
 
   //  //// Helpers ////

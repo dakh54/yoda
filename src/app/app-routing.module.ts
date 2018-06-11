@@ -7,7 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { PageNotFoundComponent } from './errors/page-not-found.component';
-
+import { ActivationFailComponent } from './login/activation-fail.component';
+import { ActivationSuccessComponent } from './login/activation-success.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,12 @@ const routes: Routes = [
   },
   {
     path: 'page-not-found', component: PageNotFoundComponent
+  },
+  {
+    path: 'activation-success', component: ActivationSuccessComponent 
+  },
+  {
+    path: 'activation-fail', component: ActivationFailComponent 
   },
   { path: '**', redirectTo: '' }
 ];

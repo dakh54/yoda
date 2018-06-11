@@ -13,7 +13,8 @@ import {
   MatSelectModule,
   MatAutocompleteModule,
   MatCheckboxModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSnackBarModule
  } from '@angular/material';
 
 @NgModule({
@@ -30,7 +31,8 @@ import {
     MatSelectModule,
     MatAutocompleteModule,
     MatCheckboxModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ]
 })
 export class AppMaterialModule {}

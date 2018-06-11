@@ -17,6 +17,8 @@ import { environment } from '../environments/environment';
 
 import { FirebasedModule } from './shared/firebase.module';
 import { PageNotFoundComponent } from './errors/page-not-found.component';
+import { ActivationSuccessComponent } from './login/activation-success.component';
+import { ActivationFailComponent } from './login/activation-fail.component';
 
 
 
@@ -30,7 +32,9 @@ import { PageNotFoundComponent } from './errors/page-not-found.component';
     HomeLayoutComponent,
     LoginLayoutComponent,
     HeaderComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ActivationSuccessComponent,
+    ActivationFailComponent
     
     
   ],
