@@ -69,10 +69,7 @@ export class AuthService {
   // }
 
   createUser(email: string, password: string){
-    console.log('email', email);
-    console.log('password', password);
-
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+      return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
   // // Returns current user
   // get currentUser(): any {

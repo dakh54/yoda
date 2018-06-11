@@ -25,6 +25,7 @@
     </div>
   </form>
 
+  
   <!-- activate account -->
   <form class="center-page" *ngIf="isActivateAccount" autocomplete="off" novalidate [formGroup]="activateForm" (ngSubmit)="activateAccount()">
     <img [src]="imgSrc" />
@@ -33,10 +34,10 @@
     <!-- activate email -->
     <mat-form-field>
       <input type="email" matInput placeholder="Email" formControlName="activateEmail" required [errorStateMatcher]="matcher">
-      <mat-error *ngIf="activateForm.get('activateEmail').hasError('email') && !activateForm.get('activateEmail').hasError('required')">
+      <mat-error *ngIf="activateEmailCtrl.hasError('email') && !activateEmailCtrl.hasError('required')">
         Please enter a valid email address
       </mat-error>
-      <mat-error *ngIf="activateForm.get('activateEmail').hasError('required')">
+      <mat-error *ngIf="activateEmailCtrl.hasError('required')">
         Email is
         <strong>required</strong>
       </mat-error>
@@ -46,15 +47,15 @@
     <div formGroupName="passwordGroup" class="password-group">
 
       <!-- password -->
-      <mat-form-field appearance="standard">
+      <mat-form-field>
         <input [type]="hidePassword ? 'password' : 'text'" formControlName="activatePassword" matInput placeholder="Password" required [errorStateMatcher]="matcher">
         <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
         <mat-hint></mat-hint>
-        <mat-error *ngIf="activateForm.get('passwordGroup').invalid && activateForm.get('passwordGroup.activatePassword').hasError('required')">
+        <mat-error *ngIf="activateForm.get('passwordGroup').invalid && activatePasswordCtrl.hasError('required')">
           Password is
           <strong>required</strong>
         </mat-error>
-        <mat-error *ngIf="activateForm.get('passwordGroup').invalid && activateForm.get('passwordGroup.activatePassword').hasError('minlength')">
+        <mat-error *ngIf="activateForm.get('passwordGroup').invalid && activatePasswordCtrl.hasError('minlength')">
           Password is
           <strong> 8 </strong> characters minimums.
         </mat-error>
@@ -62,16 +63,16 @@
       </mat-form-field>
 
       <!-- confirm password -->
-      <mat-form-field appearance="standard">
+      <mat-form-field>
         <input [type]="hidePasswordConfirmed ? 'password' : 'text'" formControlName="activateConfirmedPassword" matInput placeholder="Confirm Password"
           required [errorStateMatcher]="parentMatcher">
         <mat-icon matSuffix (click)="hidePasswordConfirmed = !hidePasswordConfirmed">{{hidePasswordConfirmed ? 'visibility' : 'visibility_off'}}</mat-icon>
         <mat-hint></mat-hint>
         <mat-error *ngIf="activateForm.get('passwordGroup').hasError('match') &&
-        !activateForm.get('passwordGroup.activateConfirmedPassword').errors"> Password does not
+        !activateConfirmedPasswordCtrl.errors"> Password does not
           <strong>match</strong>
         </mat-error>
-        <mat-error *ngIf="activateForm.get('passwordGroup.activateConfirmedPassword').hasError('required')"> Password is
+        <mat-error *ngIf="activateConfirmedPasswordCtrl.hasError('required')"> Password is
           <strong>required</strong>
         </mat-error>
       </mat-form-field>

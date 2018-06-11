@@ -6,11 +6,13 @@ import { BranchNewComponent } from './branch-new/branch-new.component';
 import { BranchEditComponent } from './branch-edit/branch-edit.component';
 import { BranchListComponent } from './branch-list/branch-list.component';
 import { BranchService } from './branch.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     BranchRoutingModule
   ],
   providers: [

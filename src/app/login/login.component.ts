@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { UserService } from '../users/user.service';
 
 import { MyErrorStateMatcher, ParentErrorStateMatcher } from '../shared/MyErrorStateMatcher';
+import { RoleService } from '../roles/role.service';
 
 
 
@@ -83,33 +84,26 @@ export class LoginComponent implements OnInit {
     this.auth.emailLogin(this.loginForm.get('email').value, this.loginForm.get('password').value)
     .then((employee) => {
       this.auth.authState = employee;
-       
-      //  console.log('inLoginComponent-user-uid', employee.user.uid);
-      //  console.log('inLoginComponent-user', employee);
-      
-        // this.userService.getEmployee('LtySLveum6o4sVHkpojQ');
-        // this.userService.getEmployee('LtySLveum6o4sVHkpojQ'
-        // ).subscribe(
-        //   data => console.log('getEmployee', data)
-        // )
-
       this.error = null;
-      
-
       this.router.navigate(['/users']);
-
-      
     })
     .catch(err => this.error = err);
   }
 
-  activateAccount() {
 
+  activateAccount() {
+    // check if email has only exist one in employees collection
+    this.userService.getEmployeeByEmail(this.activateEmailCtrl.value)
+      .subscribe(
+        user => console.log('activate account', user),
+        err => console.log('Failed to gete employee data by email', err)
+      );
+    
+     
   }
 
   toggleActivateAccount() {
     this.isActivateAccount = !this.isActivateAccount;
-
     if(this.isActivateAccount) {
       this.activateForm.reset();
     } else {
@@ -117,6 +111,18 @@ export class LoginComponent implements OnInit {
     }
   }
   
+
+  get activateEmailCtrl() {
+    return this.activateForm.get('activateEmail');
+  }
+
+  get activatePasswordCtrl() {
+    return this.activateForm.get('passwordGroup.activatePassword');
+  }  
+
+  get activateConfirmedPasswordCtrl() {
+    return this.activateForm.get('passwordGroup.activateConfirmedPassword');
+  }  
 }
 
 

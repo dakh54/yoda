@@ -8,9 +8,10 @@ import { Irole } from '../models/irole';
 @Injectable()
 export class RoleService {
   rolesCollection: AngularFirestoreCollection<Irole>;
- 
+  private collectionName: string = 'roles'
+
   constructor(private afs: AngularFirestore) {
-    this.rolesCollection = this.afs.collection<Irole>('roles', ref => ref.orderBy('name'));
+    this.rolesCollection = this.afs.collection<Irole>(this.collectionName, ref => ref.orderBy('name'));
    }
 
    getRoles() {
@@ -23,5 +24,9 @@ export class RoleService {
         })
       })
     );
+   }
+
+   getRole(role: string) {
+      return this.afs.collection<Irole>(this.collectionName, ref => ref.where('name','==', role)).valueChanges();
    }
 }

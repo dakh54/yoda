@@ -18,7 +18,9 @@ export class HeaderComponent {
     );
   constructor(private authService: AuthService, private breakpointObserver: BreakpointObserver) { }
 
-  // onLogout() {
-  //   this.authService.logout();
-  // }
+
+
+  onLogout() {
+    this.authService.signOut();
+  }
 }

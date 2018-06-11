@@ -1,3 +1,25 @@
-<p>
-  branch-new works!
-</p>
+<form [formGroup]="loginForm" novalidate style="margin-top: 200px; margin-left: 200px;">
+  <div>
+    <label for="email">Email</label><br>
+    <input type="email" formControlName="email">
+  </div>
+    
+  <div>
+
+    <label for="username">Username</label><br>
+    <input type="username" formControlName="username">
+    
+  </div>
+
+  <div *ngIf="username.invalid && username.dirty" class="notification is-danger">
+    {{ username.value }} is already taken
+  </div>
+  
+  <div *ngIf="username.valid" class="notification is-success">
+    {{ username.value }} is available
+  </div>
+  
+  <div *ngIf="username.pending" class="notification is-info">
+    Hold tight... Checking availability of {{ username.value }}
+  </div>
+</form>
