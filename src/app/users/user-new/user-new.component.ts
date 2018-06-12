@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Iemployee } from '../../models/iemployee';
-import { FormGroup, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MyErrorStateMatcher } from '../../shared/MyErrorStateMatcher';
 import { BranchService } from '../../branches/branch.service';
 import { Ibranch, Irole } from '../../models/index-models';
@@ -133,9 +133,9 @@ export class UserNewComponent implements OnInit {
   }
 
   save() {
-    console.log('----------------------------------------------');
-    console.log('valid', this.newEmployeeForm.valid);
-    console.log('newEmplooyeeForm', this.newEmployeeForm.value);
+    // console.log('----------------------------------------------');
+    // console.log('valid', this.newEmployeeForm.valid);
+    // console.log('newEmplooyeeForm', this.newEmployeeForm.value);
 
     let employee = Object.assign({}, this.newEmployeeForm.value);
 
@@ -161,33 +161,22 @@ export class UserNewComponent implements OnInit {
 
       // use ForkJoin and subscribe for value
 
-      employee.createBy = this.auth.authState.user.email;
-      
+        employee.createBy = this.auth.authState.user.email;
+        
 
-      
+        
 
-      this.userService.addNewEmployee(employee).then(
-        success => {
-          console.log('User added', success);
-          this.userService.updateCreatedAt(employee).catch(
-            err => console.log('Failed to update employee field createAt', err)
-          )
-
-          console.log('after-emailCtr is pristine', this.emailCtrl.pristine);
-
-       
-          console.log('after-emailCtr is pristine', this.emailCtrl.pristine);
-          
-          this.myNgForm.resetForm();
-        },
-        err => console.log('Failed to create new user', err)
-      )
-      
- 
-            console.log('employee', employee);
-            console.log('----------------------------------------------');
-          
-        }
+        this.userService.addNewEmployee(employee).then(
+          success => {
+            console.log('User added', success);
+            this.userService.updateCreatedAt(employee).catch(
+              err => console.log('Failed to update employee field createAt', err)
+            )
+            this.myNgForm.resetForm();
+          },
+          err => console.log('Failed to create new user', err)
+        );
+       }
         
       }
         

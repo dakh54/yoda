@@ -2,9 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-  AngularFirestoreCollection
+  AngularFirestore
 } from "angularfire2/firestore";
 import { Router } from "@angular/router";
 // import * as firebase from "firebase/app";

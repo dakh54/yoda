@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeLayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -25,16 +25,16 @@ const routes: Routes = [
       { path: 'branches', loadChildren: './branches/branch.module#BranchModule'}
     ]
   },
-  {
-    path: '',
-    component: LoginLayoutComponent,
-    children: [
-      {
-        path: 'login',
-        component: LoginComponent
-      }
-    ]
-  },
+  // {
+  //   path: '',
+  //   component: LoginLayoutComponent,
+  //   children: [
+  //     {
+  //       path: 'login',
+  //       component: LoginComponent
+  //     }
+  //   ]
+  // },
   {
     path: 'page-not-found', component: PageNotFoundComponent
   },

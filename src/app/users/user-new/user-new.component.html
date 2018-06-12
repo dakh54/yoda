@@ -56,7 +56,7 @@
 
       <!-- home office -->
       <mat-form-field appearance="standard">
-          <mat-label>Home Office</mat-label>
+        <mat-label>Home Office</mat-label>
         <mat-select formControlName="homeOffice" [errorStateMatcher]="matcher" required>
           <mat-option *ngFor="let branch of branches" [value]="branch.name">
             {{ branch.name }}
@@ -71,6 +71,7 @@
           Your selection is invalid
         </mat-error>
       </mat-form-field>
+      <mat-icon matSuffix color="accent" matTooltip="add new role">add</mat-icon>
     </div>
 
 
