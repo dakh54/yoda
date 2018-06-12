@@ -11,7 +11,7 @@ import { UserService } from '../user.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { CustomValidator } from '../../shared/custom-validator';
 
-import * as firebase from 'firebase';
+
 
 
 
@@ -161,17 +161,28 @@ export class UserNewComponent implements OnInit {
       // use ForkJoin and subscribe for value
 
       employee.createBy = this.auth.authState.user.email;
-      employee.createAt = firebase.database.ServerValue.TIMESTAMP;
+      
 
-      console.log('jsonString', JSON.stringify(firebase.database.ServerValue.TIMESTAMP))
+      
 
-      // this.userService.addNewEmployee(employee).then(
-      //   success => {
-      //     console.log('User added', success);
-      //     this.newEmployeeForm.reset();
-      //   },
-      //   err => console.log('Failed to create new user', err)
-      // )
+      this.userService.addNewEmployee(employee).then(
+        success => {
+          console.log('User added', success);
+          this.userService.updateCreatedAt(employee).catch(
+            err => console.log('Failed to update employee field createAt', err)
+          )
+
+          console.log('after-emailCtr is pristine',          this.emailCtrl.pristine)
+
+          
+
+          console.log('after-emailCtr is pristine',          this.emailCtrl.pristine)
+          
+          
+        },
+        err => console.log('Failed to create new user', err)
+      )
+      this.newEmployeeForm.reset();
  
             console.log('employee', employee);
             console.log('----------------------------------------------');

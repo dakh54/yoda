@@ -9,6 +9,6 @@ export interface Iperson {
     phone?: string []
     pictureUrl?: string
     email?: string
-    createAt?: Date;
+    createAt?: Date
     createBy?: string
 }
