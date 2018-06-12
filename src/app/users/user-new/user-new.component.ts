@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Iemployee } from '../../models/iemployee';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { MyErrorStateMatcher } from '../../shared/MyErrorStateMatcher';
 import { BranchService } from '../../branches/branch.service';
 import { Ibranch, Irole } from '../../models/index-models';
@@ -22,6 +22,7 @@ import { CustomValidator } from '../../shared/custom-validator';
 })
 export class UserNewComponent implements OnInit {
 
+ @ViewChild('myForm') myNgForm;
   newEmployeeForm: FormGroup;
   employee: Iemployee;
   branches: Ibranch[];
@@ -172,17 +173,16 @@ export class UserNewComponent implements OnInit {
             err => console.log('Failed to update employee field createAt', err)
           )
 
-          console.log('after-emailCtr is pristine',          this.emailCtrl.pristine)
+          console.log('after-emailCtr is pristine', this.emailCtrl.pristine);
 
+       
+          console.log('after-emailCtr is pristine', this.emailCtrl.pristine);
           
-
-          console.log('after-emailCtr is pristine',          this.emailCtrl.pristine)
-          
-          
+          this.myNgForm.resetForm();
         },
         err => console.log('Failed to create new user', err)
       )
-      this.newEmployeeForm.reset();
+      
  
             console.log('employee', employee);
             console.log('----------------------------------------------');

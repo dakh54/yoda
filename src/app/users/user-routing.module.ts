@@ -6,10 +6,9 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 
 
 const routes: Routes = [
-  { path: ':id/edit', component: UserEditComponent },
-  { path: 'list', component: UserListComponent },
-  { path: 'new', component: UserNewComponent },
-  { path: '', redirectTo: 'list', pathMatch: 'full' }
+  { path: 'userEdit/:id', component: UserEditComponent },
+  { path: '', component: UserListComponent },
+  { path: 'new', component: UserNewComponent }
 ];
 
 @NgModule({

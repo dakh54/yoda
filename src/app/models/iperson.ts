@@ -1,4 +1,5 @@
 import { Iaddress } from "./iaddress";
+import { Database } from "@firebase/database";
 
 export interface Iperson {
     uid?: string // set documentId of AngularFireStore in a collection
@@ -9,6 +10,6 @@ export interface Iperson {
     phone?: string []
     pictureUrl?: string
     email?: string
-    createAt?: Date
+    createAt?: Date;
     createBy?: string
 }
