@@ -15,9 +15,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     BranchRoutingModule
   ],
-  providers: [
-    BranchService
-  ],
   declarations: [
     BranchNewComponent, 
     BranchEditComponent, 

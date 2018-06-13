@@ -5,7 +5,9 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Irole } from '../models/irole';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RoleService {
   rolesCollection: AngularFirestoreCollection<Irole>;
   private collectionName: string = 'roles'

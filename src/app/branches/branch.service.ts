@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+
 export class BranchService {
   branchesCollections: AngularFirestoreCollection<Ibranch>;
 

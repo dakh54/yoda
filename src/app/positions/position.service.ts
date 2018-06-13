@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { Iposition } from '../models/iposition';
 import { map } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PositionService {
 
   positionsCollections: AngularFirestoreCollection<Iposition>;

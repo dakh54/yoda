@@ -1,5 +1,5 @@
 export interface Iaddress {
-    number?: string
+    locationNumber?: string
     street?: string
     village?: string
     commune?: string

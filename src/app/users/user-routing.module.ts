@@ -6,7 +6,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 
 
 const routes: Routes = [
-  { path: 'userEdit/:id', component: UserEditComponent },
+  { path: 'edit/:id', component: UserEditComponent },
   { path: '', component: UserListComponent },
   { path: 'new', component: UserNewComponent }
 ];

@@ -5,10 +5,10 @@ import { BranchListComponent } from './branch-list/branch-list.component';
 import { BranchNewComponent } from './branch-new/branch-new.component';
 
 const routes: Routes = [
-  { path: ':id/edit', component: BranchEditComponent },
-  { path: 'list', component: BranchListComponent },
-  { path: 'new', component: BranchNewComponent },
-  { path: '', redirectTo: 'list', pathMatch: 'full' }
+  { path: 'edit/:id', component: BranchEditComponent },
+  { path: '', component: BranchListComponent },
+  { path: 'new', component: BranchNewComponent }
+  
 
 ];
 
