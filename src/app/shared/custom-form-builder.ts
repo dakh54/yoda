@@ -5,13 +5,13 @@ export class CustomFormBuilder {
 
     createAddressForm() {
         return this.fb.group({
-            locationNumber: '',
+            house: '',
             street: '',
             village: '',
             commune: '',
             khan: '',
             city: '',
-            country: '',
+            country: 'Cambodia'
         })
     }
 }

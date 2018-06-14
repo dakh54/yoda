@@ -1,3 +1,211 @@
-<p>
-  lead-new works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="mat-display-1">Lead</mat-card-title>
+    <mat-card-subtitle>Create New Lead</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+    <form class="example-form" [formGroup]="newLeadForm" novalidate>
+
+      <div class="example-full-width" cellspacing="0">
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstname" required>
+          <mat-error *ngIf="firstname.hasError('required')">
+            First name is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastname" required>
+          <mat-error *ngIf="lastname.hasError('required')">
+            Last name is
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+
+      <div class="example-full-width" cellspacing="0">
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>House Number</mat-label>
+          <input matInput formControlName="house">
+        </mat-form-field>
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>Street</mat-label>
+          <input matInput formControlName="street">
+        </mat-form-field>
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>Village</mat-label>
+          <input matInput formControlName="village">
+        </mat-form-field>
+
+      </div>
+
+      <div class="example-full-width" cellspacing="0">
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>Commune/Sangkat</mat-label>
+          <input matInput formControlName="commune">
+        </mat-form-field>
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>Khan</mat-label>
+          <input matInput formControlName="khan">
+        </mat-form-field>
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>City/Province</mat-label>
+          <input matInput formControlName="city">
+        </mat-form-field>
+
+      </div>
+
+      <div class="example-full-width" cellspacing="0">
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country">
+        </mat-form-field>
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>Primary Phone</mat-label>
+          <input matInput formControlName="primaryphone">
+        </mat-form-field>
+
+
+        <mat-form-field class="" appearance="standard">
+          <mat-label>Secondary Phone</mat-label>
+          <input matInput formControlName="secondaryphone">
+        </mat-form-field>
+
+      </div>
+
+      <div class="example-full-width">
+        <mat-form-field class="" appearance="standard">
+          <mat-label>Comments</mat-label>
+          <textarea matInput formControlName="comment"></textarea>
+        </mat-form-field>
+
+      </div>
+
+
+
+    </form>
+    <!-- <form class="example-form" [formGroup]="newLeadForm" novalidate>
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstname" required>
+              <mat-error *ngIf="firstname.hasError('required')">
+                First name is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastname" required>
+              <mat-error *ngIf="lastname.hasError('required')">
+                Last name is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>House Number</mat-label>
+              <input matInput formControlName="house">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>Street</mat-label>
+              <input matInput formControlName="street">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>Village</mat-label>
+              <input matInput formControlName="village">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>Commune/Sangkat</mat-label>
+              <input matInput formControlName="commune">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>Khan</mat-label>
+              <input matInput formControlName="khan">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>City/Province</mat-label>
+              <input matInput formControlName="city">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>Country</mat-label>
+              <input matInput formControlName="country">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>Primary Phone</mat-label>
+              <input matInput formControlName="primaryphone">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>Secondary Phone</mat-label>
+              <input matInput formControlName="secondaryphone">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          
+            <mat-form-field class="example-full-width" appearance="standard">
+              <mat-label>Comments</mat-label>
+              <textarea matInput formControlName="comment"></textarea>
+            </mat-form-field>
+          
+        </tr>
+      </table>
+    </form> -->
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button type="submit">Ok</button>
+  </mat-card-actions>
+</mat-card>

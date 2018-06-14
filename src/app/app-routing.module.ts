@@ -23,7 +23,7 @@ const routes: Routes = [
       },
       { path: 'users', loadChildren: './users/user.module#UserModule' },
       { path: 'leads', loadChildren: './leads/lead.module#LeadModule' },
-      { path: 'customers', loadChildren: './customer/customer.module#CustomerModule' },
+      { path: 'customers', loadChildren: './customers/customer.module#CustomerModule' },
       { path: 'branches', loadChildren: './branches/branch.module#BranchModule'}
 
     ]
