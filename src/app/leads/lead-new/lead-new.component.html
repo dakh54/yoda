@@ -1,13 +1,10 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title class="mat-display-1">Lead</mat-card-title>
-    <mat-card-subtitle>Create New Lead</mat-card-subtitle>
-  </mat-card-header>
+<mat-card class="mat-typography">
+  <h1>Create New Lead</h1>
   <mat-card-content>
 
-    <form class="example-form" [formGroup]="newLeadForm" novalidate>
+    <form class="form" [formGroup]="newLeadForm" novalidate>
 
-      <div class="example-full-width" cellspacing="0">
+      <div class="section two-child">
 
         <mat-form-field class="" appearance="standard">
           <mat-label>First Name</mat-label>
@@ -30,7 +27,7 @@
       </div>
 
 
-      <div class="example-full-width" cellspacing="0">
+      <div class="section three-child">
 
         <mat-form-field class="" appearance="standard">
           <mat-label>House Number</mat-label>
@@ -49,7 +46,7 @@
 
       </div>
 
-      <div class="example-full-width" cellspacing="0">
+      <div class="section">
 
         <mat-form-field class="" appearance="standard">
           <mat-label>Commune/Sangkat</mat-label>
@@ -68,7 +65,7 @@
 
       </div>
 
-      <div class="example-full-width" cellspacing="0">
+      <div class="section">
 
         <mat-form-field class="" appearance="standard">
           <mat-label>Country</mat-label>
@@ -88,14 +85,21 @@
 
       </div>
 
-      <div class="example-full-width">
-        <mat-form-field class="" appearance="standard">
-          <mat-label>Comments</mat-label>
-          <textarea matInput formControlName="comment"></textarea>
-        </mat-form-field>
+      <div class="section">
 
+        <mat-form-field class="full-width" appearance="standard">
+          <mat-label>Comments</mat-label>
+          <textarea matInput formControlName="comment" [matTextareaAutosize]="true"></textarea>
+        </mat-form-field>
       </div>
 
+      
+        <div class="section">
+
+            <button mat-raised-button type="submit" color="warn">
+              Save
+            </button>
+          </div>
 
 
     </form>
@@ -204,8 +208,7 @@
         </tr>
       </table>
     </form> -->
+
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button type="submit">Ok</button>
-  </mat-card-actions>
+
 </mat-card>
