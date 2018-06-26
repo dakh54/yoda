@@ -8,7 +8,7 @@ export interface Iperson {
     lastName?: string
     nationalId?: string
     phone?: string []
-    pictureUrl?: string
+    photoURL?: string
     email?: string
     createAt?: Date;
     createBy?: string

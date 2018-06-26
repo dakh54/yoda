@@ -26,7 +26,7 @@ export class UserService {
   }
 
   getEmployee(userId: string) {
-    // return this.db.doc(`employees/${userId}`).valueChanges();
+    return this.db.doc(`employees/${userId}`).valueChanges();
   }
 
   getEmployeeByEmail(email: string) {

@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import {
   AngularFirestore
@@ -11,13 +10,15 @@ import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { Iemployee } from "../models/iemployee";
 import { User } from "@firebase/auth-types";
+import { IpersonBrief } from "../models/iperson-brief";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   authState: any = null;
-  employee: Observable<Iemployee>;
+  // employee: Observable<Iemployee>;
+  private _user: IpersonBrief;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -25,7 +26,8 @@ export class AuthService {
     private router: Router
   ) {
 
-    this.employee = this.afAuth.authState.pipe(
+    // this.employee = this.afAuth.authState.pipe(
+    this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
             return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
@@ -34,16 +36,14 @@ export class AuthService {
         }
       })
     )
+  }
 
-    // // get authState when there is a change in login
-    // this.afAuth.authState.subscribe(auth => {
-    //   this.authState = auth;
-    //   if(this.authState) {
-        
-    //   }
+  set User(briefUser: IpersonBrief){
+    this._user = briefUser;
+  }
 
-      
-    // });
+  get User(): IpersonBrief {
+    return this._user;
   }
 
   // emailLogin(email: string, password: string) {
@@ -62,8 +62,14 @@ export class AuthService {
     return this.authState !== null;
   }
 
-  // getUser(): Observable<Iemployee> {
+  // getAddionalUserInfo() {
+  //   console.log('getAdditionalUserInfo - authenticate', this.authenticated);
+  //   if(this.authenticated) {
+  //     console.log('getAdditionalUserInfo', this.afAuth.auth.currentUser.email);
+  //     this.afs.doc(`employees/${this.afAuth.auth.currentUser.email}`).valueChanges();
+  //   }
 
+  //   console.log('this.afAuth.auth.currentUser.email', this.afAuth.auth.currentUser.email);
   // }
 
   createUser(email: string, password: string){
@@ -117,6 +123,7 @@ export class AuthService {
   //// Sign Out ////
   signOut(): void {
     this.afAuth.auth.signOut();
+    this._user = null;
     // this.router.navigate(["/"]);
   }
 

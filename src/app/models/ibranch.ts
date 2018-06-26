@@ -1,4 +1,5 @@
 import { Iaddress } from "./iaddress";
+import { Iemployee } from "./iemployee";
 
 export interface Ibranch {
     id: string
@@ -7,4 +8,5 @@ export interface Ibranch {
     address?: Iaddress
     email?: string []
     telephone?: string []
+    employees?: Iemployee []
 }

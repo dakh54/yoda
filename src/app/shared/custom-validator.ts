@@ -1,7 +1,7 @@
 import { AngularFirestore } from "angularfire2/firestore";
 import { AbstractControl } from "@angular/forms";
-import { debounceTime, map, take, tap, switchMap, distinctUntilChanged } from "rxjs/operators";
-import { pipe } from "@angular/core/src/render3/pipe";
+import { debounceTime, map, take } from "rxjs/operators";
+
 
 
 export class CustomValidator {

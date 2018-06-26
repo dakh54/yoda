@@ -11,6 +11,7 @@ import { Iemployee } from '../models/iemployee';
 import { AngularFirestore } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { IpersonBrief } from '../models/iperson-brief';
 
 
 
@@ -94,11 +95,48 @@ export class LoginComponent implements OnInit {
           this.auth.authState = employee;
           // console.log('authState in login', this.auth.authState);
           // console.log('authState in login-authendticate', this.auth.authenticated);
-          // console.log('authState in login-employee', employee);
+          console.log('authState in login-employee', employee);
           // console.log('authState in login-email verify', employee.user.emailVerified);
 
+          // //get user additional Info
+          // this.auth.getAddionalUserInfo().subscribe(
+          //   (user: Iemployee) => {
+          //     let userBrief: IpersonBrief = {
+          //       firstName: user.firstName,
+          //       lastName:  user.lastName,
+          //       email: user.email,
+          //       pictureUrl: user.pictureUrl
+          //     }
+          //     console.log('user in brief', user);
+          //     this.auth.User = userBrief;
+          //     console.log('this.auth._user', this.auth.User);
+          //   },
+          //   err => {
+          //     this.error = "Invalid log in cannot get additional user data";
+          //     console.log('Fail to get addition user info data for id ', this.auth.currentUserId);
+          //   }
+          // );
 
-          this.router.navigate(['/users']);
+          this.userService.getEmployee(employee.user.email).subscribe(
+            (emp: Iemployee) => {
+              this.auth.User = {
+                firstName: emp.firstName,
+                lastName: emp.lastName,
+                email: emp.email,
+                photoURL: emp.photoURL
+              };
+              
+              console.log('auth.user', this.auth.User);
+              this.router.navigate(['/leads', 'new']);
+            },
+            err => {
+              this.auth.signOut();
+              this.error = 'invalid login - failed to get additional user information'
+              console.log('failed to get addional user info', err);
+            }
+          )
+
+          
         } else {
           this.error = 'Please activate your account before sign in.';
           console.log('Please activate your account before sign in.');
@@ -126,10 +164,10 @@ export class LoginComponent implements OnInit {
         users => {
           if (users.length == 1) {
             this.auth.createUser(email, password).then(credential => {
-              console.log('activate account for', credential);
-              console.log('activate account for user', users);
-              console.log('activate account for user[0].email', users[0].email);
-              console.log('activate account-uid', credential.user.uid);
+              // console.log('activate account for', credential);
+              // console.log('activate account for user', users);
+              // console.log('activate account for user[0].email', users[0].email);
+              // console.log('activate account-uid', credential.user.uid);
 
               this.afsAuth.auth.currentUser.sendEmailVerification();
               
