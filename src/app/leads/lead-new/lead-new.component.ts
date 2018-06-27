@@ -79,7 +79,14 @@ export class LeadNewComponent implements OnInit {
     lead.status = 'open';
     console.log("Lead object", lead);
 
-    this.leadService.add(lead).catch();
+    this.leadService.add(lead).catch(
+      err => {
+        console.log('Failed to save create new lead', err);
+        
+        
+        
+      }
+    );
 
   }
 }

@@ -1,7 +1,9 @@
 export class Utility {
     static removeEmptyOrNullProperty(anyObjects: Object) {
         Object.keys(anyObjects).forEach(k => {
-            anyObjects[k] = anyObjects[k] === undefined ? "" : anyObjects[k].remove();
+            if(anyObjects[k] === undefined || anyObjects[k] === null || anyObjects[k] === '') {
+                delete(anyObjects[k]);
+            }
           });
         return anyObjects;
     }
